@@ -1,0 +1,525 @@
+<!-- ============================================================
+     BIKASH MISHRA — INTERACTIVE ACADEMIC PORTFOLIO
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    width: 100% !important;
+    height: 100% !important;
+    overflow-x: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #ffffff; color: #172033; line-height: 1.6; }
+.container { max-width: 1150px; margin: auto; padding: 0 28px; }
+a { color: inherit; }
+
+/* NAV */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid #e7ebf1; }
+.nav-row { max-width: 1150px; margin: auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.nav-name { font-weight: 800; font-size: 15px; letter-spacing: -0.3px; color: #142033; }
+.nav-links { display: flex; gap: 26px; flex-wrap: wrap; }
+.nav-links a { font-size: 13px; font-weight: 700; text-decoration: none; color: #536174; padding-bottom: 3px; border-bottom: 2px solid transparent; transition: all 0.25s ease; }
+.nav-links a:hover, .nav-links a.active { color: #126b78; border-color: #126b78; }
+
+/* BLACK NEWS FLASH TICKER */
+.ticker { background: #0e1820; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.ticker-row { max-width: 1150px; margin: auto; padding: 10px 28px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #cfe0e2; }
+.ticker-dot { width: 7px; height: 7px; border-radius: 50%; background: #4fb9c4; flex-shrink: 0; animation: ticker-pulse 2s ease-in-out infinite; }
+@keyframes ticker-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+.ticker-text { flex: 1; opacity: 1; transition: opacity 0.4s ease; }
+.ticker-text.fade { opacity: 0; }
+.ticker-link { flex-shrink: 0; color: #4fb9c4; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.ticker-link:hover { text-decoration: underline; }
+
+/* HERO & PROFILE PHOTO */
+.hero { position: relative; overflow: hidden; min-height: 540px; display: flex; align-items: center; padding: 70px 0; background: linear-gradient(135deg, #f4f8fa 0%, #ffffff 70%); border-bottom: 1px solid #e7ebf1; }
+.lattice-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 1; }
+.hero > .container { position: relative; z-index: 2; pointer-events: none; }
+.hero a, .hero button { pointer-events: auto; }
+.hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 50px; align-items: center; }
+
+/* PROFILE IMAGE CONTAINER */
+.profile-card-wrap { display: flex; justify-content: center; position: relative; }
+.profile-card { position: relative; width: 280px; height: 340px; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(20,32,51,0.12); border: 4px solid #ffffff; background: #eef1f5; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.profile-card:hover { transform: translateY(-6px); box-shadow: 0 25px 50px rgba(18,107,120,0.2); }
+.profile-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.tag { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; color: #126b78; margin-bottom: 18px; background: rgba(18,107,120,0.08); padding: 4px 12px; border-radius: 20px; }
+h1 { font-size: clamp(38px, 5vw, 60px); line-height: 1.05; letter-spacing: -2px; margin-bottom: 18px; color: #142033; }
+.subtitle { font-size: 21px; color: #536174; max-width: 680px; margin-bottom: 25px; }
+.description { font-size: 15.5px; color: #667085; max-width: 700px; margin-bottom: 32px; }
+.buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+.button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; transition: 0.25s ease; cursor: pointer; }
+.button svg { width: 15px; height: 15px; flex-shrink: 0; }
+.primary { background: #142033; color: white; border: 1px solid #142033; }
+.primary:hover { background: #126b78; border-color: #126b78; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(18,107,120,0.25); }
+.secondary { border: 1px solid #ccd4df; color: #263449; background: white; }
+.secondary:hover { border-color: #126b78; color: #126b78; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+
+/* TYPED */
+.typed { color: #126b78; border-bottom: 2px solid #126b78; }
+.cursor { display: inline-block; color: #126b78; animation: blink 0.9s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* INTERACTIVE RESEARCH FILTERS */
+.filter-container { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+.filter-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid #d0d7de; background: #fff; font-size: 13px; font-weight: 600; color: #536174; cursor: pointer; transition: 0.2s ease; }
+.filter-btn:hover, .filter-btn.active { background: #126b78; color: #fff; border-color: #126b78; }
+
+/* RESEARCH CARDS */
+.research-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.research-card { padding: 30px; border: 1px solid #e1e7ee; border-radius: 12px; background: #ffffff; transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); position: relative; overflow: hidden; transform-style: preserve-3d; }
+.research-card.dimmed { opacity: 0.25; transform: scale(0.97); }
+.research-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 0; background: #126b78; transition: 0.3s ease; }
+.research-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(20,32,51,0.08); border-color: #bcd0d6; }
+.research-card:hover::before { height: 100%; }
+.number { font-size: 13px; font-weight: 800; color: #126b78; margin-bottom: 12px; }
+.research-card h3 { font-size: 20px; margin-bottom: 10px; color: #172033; }
+.research-card p { color: #687386; font-size: 14.5px; }
+
+/* METRICS */
+.metrics { background: #142033; color: white; padding: 55px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+.metric-number { font-size: 42px; font-weight: 800; color: #4fb9c4; margin-bottom: 4px; }
+.metric-label { font-size: 12.5px; color: #c6ced9; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; }
+
+/* INTERACTIVE PUBLICATIONS SEARCH */
+.pub-search-box { width: 100%; padding: 12px 18px; border-radius: 8px; border: 1px solid #ccd4df; font-size: 14.5px; margin-bottom: 20px; outline: none; transition: 0.2s ease; }
+.pub-search-box:focus { border-color: #126b78; box-shadow: 0 0 0 3px rgba(18,107,120,0.15); }
+
+/* SECTIONS & TIMELINE */
+.section { padding: 80px 0; }
+.section + .section { border-top: 1px solid #eef1f5; }
+.section-header { margin-bottom: 35px; }
+.section-label { color: #126b78; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+h2 { font-size: 36px; letter-spacing: -1px; color: #142033; }
+
+.timeline { max-width: 800px; }
+.tl-item { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid #eef1f5; }
+.tl-item:first-child { border-top: none; }
+.tl-when { font-size: 13px; font-weight: 800; color: #126b78; }
+
+.pub-list { max-width: 900px; }
+.pub { display: grid; grid-template-columns: 56px 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid #eef1f5; align-items: start; transition: opacity 0.2s; }
+.pub-badge { width: 46px; height: 46px; border-radius: 10px; background: #142033; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
+.pub-title { font-size: 16.5px; font-weight: 700; color: #172033; }
+.pub-authors { font-size: 13.5px; color: #687386; margin-top: 4px; }
+.pub-meta { font-size: 12.5px; font-weight: 700; color: #126b78; margin-top: 6px; }
+
+/* CONTACT */
+.contact { background: #142033; color: white; padding: 90px 0; }
+.contact .section-label { color: #4fb9c4; }
+.contact h2 { color: white; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 35px; }
+.ccard { display: flex; align-items: flex-start; gap: 14px; padding: 18px; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; text-decoration: none; color: white; transition: 0.25s ease; }
+.ccard:hover { background: rgba(79,185,196,0.12); border-color: #4fb9c4; transform: translateY(-3px); }
+.ccard svg { width: 20px; height: 20px; color: #4fb9c4; flex-shrink: 0; }
+
+.footer { padding: 30px 0; border-top: 1px solid #e5e9ef; color: #667085; font-size: 13px; }
+
+@media (max-width: 850px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .subtitle, .description { margin-left: auto; margin-right: auto; }
+    .buttons { justify-content: center; }
+    .research-grid { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: 1fr; gap: 25px; }
+    .tl-item { grid-template-columns: 1fr; gap: 6px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav-row">
+    <div class="nav-name">BIKASH MISHRA</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#education">Education</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- BLACK NEWS FLASH BAR -->
+<div class="ticker">
+  <div class="ticker-row">
+    <span class="ticker-dot"></span>
+    <span class="ticker-text" id="tickerText"></span>
+    <a class="ticker-link" id="tickerLink" href="#contact">Get in touch &rarr;</a>
+  </div>
+</div>
+
+<section class="hero">
+<canvas class="lattice-canvas" id="latticeCanvas"></canvas>
+<div class="container">
+<div class="hero-grid">
+
+<div>
+<div class="tag">PhD Candidate · S.N. Bose National Centre</div>
+<h1>Bikash Mishra</h1>
+<div class="subtitle">Designing Porous COFs for <span class="typed" id="typedWord">Photocatalysis</span><span class="cursor">|</span></div>
+<p class="description">
+Specializing in the synthetic design and fundamental photophysics of Covalent Organic Frameworks (COFs) for solar fuel generation, energy storage, and environmental remediation.
+</p>
+<div class="buttons">
+  <a class="button primary" id="btn-email" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+    Email Me
+  </a>
+  <a class="button secondary" id="btn-scholar" href="#" target="_blank">Google Scholar</a>
+  <a class="button secondary" id="btn-orcid" href="#" target="_blank">ORCID</a>
+</div>
+</div>
+
+<!-- PROFILE PHOTO CONTAINER -->
+<div class="profile-card-wrap">
+  <div class="profile-card">
+    <img id="profileImage" class="profile-img" src="" alt="Bikash Mishra">
+  </div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section" id="about">
+<div class="container">
+<div class="section-header">
+  <div class="section-label">About</div>
+  <h2>Materials Chemist &amp; Research Scholar</h2>
+</div>
+<p style="color:#5f6b7b; max-width:850px; font-size:16px;">
+I focus on the rational design of functional porous frameworks. By combining organic synthesis with state-of-the-art optical spectroscopy, my goal is to map structure-property-performance relationships in organic semiconductors for clean energy applications.
+</p>
+</div>
+</section>
+
+<section class="section" id="research">
+<div class="container">
+<div class="section-header">
+  <div class="section-label">Interactive Explorer</div>
+  <h2>Research Focus</h2>
+</div>
+
+<div class="filter-container" id="researchFilters">
+  <button class="filter-btn active" data-filter="all">All Focus Areas</button>
+  <button class="filter-btn" data-filter="photo">Photocatalysis</button>
+  <button class="filter-btn" data-filter="energy">Energy Storage</button>
+  <button class="filter-btn" data-filter="capture">CO₂ &amp; Iodine Capture</button>
+</div>
+
+<div class="research-grid" id="researchGrid">
+  <div class="research-card" data-category="photo"><div class="number">01</div><h3>COF Photocatalysis</h3><p>Donor-acceptor COFs designed for solar-driven hydrogen evolution and CO₂ reduction.</p></div>
+  <div class="research-card" data-category="photo"><div class="number">02</div><h3>Exciton &amp; Charge Dynamics</h3><p>Probing photon absorption, charge separation, and migration in conjugated frameworks.</p></div>
+  <div class="research-card" data-category="capture"><div class="number">03</div><h3>CO₂ Capture &amp; Conversion</h3><p>Engineered porous channels for selective carbon dioxide capture and catalytic utilization.</p></div>
+  <div class="research-card" data-category="energy"><div class="number">04</div><h3>Energy Storage</h3><p>Redox-active conjugated frameworks tailored for supercapacitors and novel battery devices.</p></div>
+  <div class="research-card" data-category="capture"><div class="number">05</div><h3>Iodine Capture</h3><p>Targeted porous adsorbents for radioactive iodine sequestration and environmental cleanup.</p></div>
+  <div class="research-card" data-category="photo"><div class="number">06</div><h3>Electrocatalysis</h3><p>Conjugated frameworks engineered for efficient metal-free oxygen reduction reactions.</p></div>
+</div>
+</div>
+</section>
+
+<section class="metrics">
+<div class="container">
+<div class="metric-grid">
+  <div><div class="metric-number" data-target="16">0</div><div class="metric-label">Publications</div></div>
+  <div><div class="metric-number" data-target="800">0</div><div class="metric-label">Citations</div></div>
+  <div><div class="metric-number" data-target="9">0</div><div class="metric-label">h-Index</div></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="education">
+<div class="container">
+<div class="section-header">
+  <div class="section-label">Education</div>
+  <h2>Academic Journey</h2>
+</div>
+<div class="timeline" id="education-list"></div>
+</div>
+</section>
+
+<section class="section" id="publications">
+<div class="container">
+<div class="section-header">
+  <div class="section-label">Publications</div>
+  <h2>Searchable Research Works</h2>
+</div>
+
+<input type="text" class="pub-search-box" id="pubSearch" placeholder="🔍 Search papers by title, journal, or key terms (e.g., 'photocatalysis', 'donor-acceptor')...">
+
+<div class="pub-list" id="full-pub-list"></div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+  <div class="section-label">Get in Touch</div>
+  <h2>Collaborate &amp; Connect</h2>
+  <div class="contact-grid">
+    <a class="ccard" id="c-email" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg><div><div style="font-weight:700;">Email</div><div id="c-email-val" style="font-size:13px; opacity:0.8;">your.email@example.com</div></div></a>
+    <a class="ccard" id="c-scholar" href="#" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 9l10 6 10-6-10-6z"/></svg><div><div style="font-weight:700;">Google Scholar</div><div style="font-size:13px; opacity:0.8;">View Profile</div></div></a>
+    <a class="ccard" id="c-orcid" href="#" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg><div><div style="font-weight:700;">ORCID</div><div id="c-orcid-val" style="font-size:13px; opacity:0.8;">0000-0000-0000-0000</div></div></a>
+  </div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+  <span><strong>Bikash Mishra</strong> &middot; Academic Portfolio</span>
+  <span id="bmYear"></span>
+</div>
+</footer>
+
+<script>
+  var SITE_DATA = {
+    // PASTE YOUR DIRECT PHOTO URL HERE (e.g., GitHub, Imgur, Google Drive public link)
+    profileImageUrl: "https://via.placeholder.com/300x380/142033/ffffff?text=Bikash+Mishra",
+    email: "your.email@example.com",
+    orcidId: "0000-0000-0000-0000",
+    googleScholarUrl: "https://scholar.google.com",
+    announcements: [
+      { text: "🎓 Final-year PhD candidate — actively seeking postdoctoral positions.", link: "#contact", linkText: "Get in touch →" },
+      { text: "📄 Invited review \"Charge Dynamics in COFs\" in preparation.", link: "#publications", linkText: "See publications →" },
+      { text: "🔬 New work on bipyridinium COFs shows ~5x boost in H₂ evolution.", link: "#research", linkText: "Read more →" }
+    ],
+    education: [
+      { year: "2020–Present", title: "PhD, Chemical Sciences", details: "S. N. Bose National Centre for Basic Sciences, Kolkata" },
+      { year: "2018–2020", title: "M.Sc., Organic Chemistry", details: "Banaras Hindu University (BHU), Varanasi" },
+      { year: "2015–2018", title: "B.Sc., Chemistry (Honours)", details: "Sidho-Kanho-Birsha University, Purulia" }
+    ],
+    publications: [
+      { title: "Charge Dynamics in Covalent Organic Frameworks for Photocatalysis", authors: "Bikash Mishra, Dr. Pradip S. Pachfule", journal: "Chemical Society Reviews", badge: "CSR", doi: "#" },
+      { title: "Synthesis of High-Efficiency Donor-Acceptor COFs for Solar Energy Conversion", authors: "Bikash Mishra, et al.", journal: "Advanced Materials", badge: "AM", doi: "#" },
+      { title: "Linkage Engineering in Conjugated Porous Organic Frameworks", authors: "Bikash Mishra, et al.", journal: "Angewandte Chemie", badge: "AC", doi: "#" }
+    ]
+  };
+
+  document.getElementById('bmYear').textContent = new Date().getFullYear();
+  document.getElementById('profileImage').src = SITE_DATA.profileImageUrl;
+
+  /* --- News Flash Ticker Animation --- */
+  var tickerIndex = 0;
+  var tickerTextEl = document.getElementById('tickerText');
+  var tickerLinkEl = document.getElementById('tickerLink');
+  function renderTicker() {
+    var item = SITE_DATA.announcements[tickerIndex];
+    if(!item || !tickerTextEl) return;
+    tickerTextEl.classList.add('fade');
+    setTimeout(function() {
+      tickerTextEl.textContent = item.text;
+      tickerLinkEl.setAttribute('href', item.link);
+      tickerLinkEl.textContent = item.linkText;
+      tickerTextEl.classList.remove('fade');
+    }, 200);
+  }
+  if (SITE_DATA.announcements.length > 0) {
+    renderTicker();
+    setInterval(function () {
+      tickerIndex = (tickerIndex + 1) % SITE_DATA.announcements.length;
+      renderTicker();
+    }, 4500);
+  }
+
+  /* --- Dynamic Canvas (COF Lattice) --- */
+  (function () {
+    var canvas = document.getElementById('latticeCanvas');
+    var ctx = canvas.getContext('2d');
+    var nodes = [], mouse = { x: null, y: null, radius: 150 };
+
+    function initCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      nodes = [];
+      var count = Math.floor((canvas.width * canvas.height) / 18000);
+      for (var i = 0; i < count; i++) {
+        nodes.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          radius: Math.random() * 2 + 1.5
+        });
+      }
+    }
+
+    window.addEventListener('resize', initCanvas);
+    canvas.parentElement.addEventListener('mousemove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    canvas.parentElement.addEventListener('mouseleave', function() { mouse.x = null; mouse.y = null; });
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#126b78';
+        ctx.fill();
+
+        for (var j = i + 1; j < nodes.length; j++) {
+          var n2 = nodes[j];
+          var dist = Math.hypot(n.x - n2.x, n.y - n2.y);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.strokeStyle = 'rgba(18, 107, 120, ' + (1 - dist / 120) * 0.25 + ')';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+
+        if (mouse.x) {
+          var mDist = Math.hypot(n.x - mouse.x, n.y - mouse.y);
+          if (mDist < mouse.radius) {
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = 'rgba(79, 185, 196, ' + (1 - mDist / mouse.radius) * 0.5 + ')';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    initCanvas();
+    draw();
+  })();
+
+  /* --- Research Filter Buttons --- */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var researchCards = document.querySelectorAll('.research-card');
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      var filter = this.getAttribute('data-filter');
+
+      researchCards.forEach(function(card) {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.classList.remove('dimmed');
+        } else {
+          card.classList.add('dimmed');
+        }
+      });
+    });
+  });
+
+  /* --- Metric Counter --- */
+  var animated = false;
+  window.addEventListener('scroll', function() {
+    var metricsSec = document.querySelector('.metrics');
+    if (!metricsSec) return;
+    var top = metricsSec.getBoundingClientRect().top;
+    if (top < window.innerHeight - 50 && !animated) {
+      animated = true;
+      document.querySelectorAll('.metric-number').forEach(function(el) {
+        var target = parseInt(el.getAttribute('data-target'));
+        var count = 0;
+        var step = Math.ceil(target / 40);
+        var timer = setInterval(function() {
+          count += step;
+          if (count >= target) {
+            el.textContent = target + '+';
+            clearInterval(timer);
+          } else {
+            el.textContent = count;
+          }
+        }, 30);
+      });
+    }
+  });
+
+  /* --- Publication Search --- */
+  function renderPubs(filterText) {
+    var container = document.getElementById('full-pub-list');
+    var filtered = SITE_DATA.publications.filter(function(p) {
+      var query = (filterText || '').toLowerCase();
+      return p.title.toLowerCase().includes(query) || p.journal.toLowerCase().includes(query) || p.authors.toLowerCase().includes(query);
+    });
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<p style="color:#687386; padding:15px 0;">No matching publications found.</p>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(function(p) {
+      return '<div class="pub">' +
+        '<div class="pub-badge">' + (p.badge || 'PUB') + '</div>' +
+        '<div>' +
+          '<div class="pub-title">' + p.title + '</div>' +
+          '<div class="pub-authors">' + p.authors + ' · <em>' + p.journal + '</em></div>' +
+          '<div class="pub-meta"><a href="' + p.doi + '" target="_blank">DOI Record &rarr;</a></div>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  document.getElementById('pubSearch').addEventListener('input', function(e) {
+    renderPubs(e.target.value);
+  });
+
+  /* --- Links and Education --- */
+  document.getElementById('btn-email').href = "mailto:" + SITE_DATA.email;
+  document.getElementById('c-email').href = "mailto:" + SITE_DATA.email;
+  document.getElementById('c-email-val').textContent = SITE_DATA.email;
+  document.getElementById('btn-scholar').href = SITE_DATA.googleScholarUrl;
+  document.getElementById('c-scholar').href = SITE_DATA.googleScholarUrl;
+  document.getElementById('btn-orcid').href = "https://orcid.org/" + SITE_DATA.orcidId;
+  document.getElementById('c-orcid').href = "https://orcid.org/" + SITE_DATA.orcidId;
+  document.getElementById('c-orcid-val').textContent = SITE_DATA.orcidId;
+
+  document.getElementById('education-list').innerHTML = SITE_DATA.education.map(function(e) {
+    return '<div class="tl-item"><div class="tl-when">' + e.year + '</div><div><h3>' + e.title + '</h3><p>' + e.details + '</p></div></div>';
+  }).join('');
+
+  renderPubs('');
+
+  // Typewriter Effect
+  var typedWords = ["Photocatalysis", "CO₂ Capture", "Energy Storage", "Iodine Capture"];
+  var typedEl = document.getElementById('typedWord');
+  var wordIdx = 0, charIdx = 0, isDeleting = false;
+  function typeEffect() {
+    var word = typedWords[wordIdx];
+    if (isDeleting) {
+      charIdx--;
+      typedEl.textContent = word.substring(0, charIdx);
+      if (charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % typedWords.length; }
+    } else {
+      charIdx++;
+      typedEl.textContent = word.substring(0, charIdx);
+      if (charIdx === word.length) { isDeleting = true; setTimeout(typeEffect, 1500); return; }
+    }
+    setTimeout(typeEffect, isDeleting ? 50 : 80);
+  }
+  typeEffect();
+</script>
+
+</body>
+</html>
