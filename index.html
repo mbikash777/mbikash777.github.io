@@ -1,6 +1,6 @@
 <!-- ============================================================
      BIKASH MISHRA — ACADEMIC PORTFOLIO
-     Complete Unabridged Content + 20 PDF Publications
+     Focus: Photocatalysis, Energy Storage, and Electrocatalysis using COFs
      ============================================================ -->
 <!DOCTYPE html>
 <html lang="en">
@@ -286,7 +286,7 @@ h1 {
 }
 h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
 
-/* RESEARCH FILTERS & GRID */
+/* RESEARCH FILTERS & GRID WITH BLUR CAPABILITY */
 .filter-container { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
 .filter-btn {
   padding: 8px 18px;
@@ -316,13 +316,22 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 30px;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
 }
 .research-card:hover {
   transform: translateY(-5px);
   border-color: var(--accent);
   box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
 }
+
+/* BLUR EFFECT FOR UNSELECTED CARDS */
+.research-card.is-blurred {
+  filter: blur(5px);
+  opacity: 0.35;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
 .research-num {
   font-size: 28px;
   font-weight: 900;
@@ -495,7 +504,7 @@ footer {
         <h1>Bikash Mishra</h1>
         <div class="subtitle">Designing Porous COFs for <span class="typed" id="typedWord">Photocatalysis</span></div>
         <p class="description">
-          Expertise in the design and synthesis of covalent organic frameworks (COFs) for energy storage, electrocatalysis, and photocatalysis.
+          Specialized in the rational design, synthesis, and fundamental understanding of Covalent Organic Frameworks (COFs) for photocatalysis, energy storage, and electrocatalysis.
         </p>
         <div class="buttons">
           <a class="btn btn-primary" id="btn-email" href="#">Email Me</a>
@@ -519,16 +528,16 @@ footer {
 <section class="section" id="about">
   <div class="container">
     <div class="section-label">About</div>
-    <h2>Research Scholar in material chemsitry</h2>
+    <h2>Research Scholar in Materials Chemistry</h2>
     <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px);">
       <p style="font-size: 17px; color: #cbd5e1; max-width: 900px;">
-       I focus on the design and development of functional porous materials for photocatalytic, energy-storage, and electrocatalytic applications, with the aim of establishing structure–property–performance relationships and advancing sustainable solar-fuel generation.
+       My research focuses on tailoring covalent organic frameworks (COFs) specifically for photocatalytic organic transformations and hydrogen generation, energy storage devices like lithium-ion batteries and supercapacitors, and electrocatalytic conversion reactions.
       </p>
     </div>
   </div>
 </section>
 
-<!-- RESEARCH SECTION WITH WORKING CATEGORY FILTERS -->
+<!-- RESEARCH SECTION WITH DYNAMIC BLUR EFFECT -->
 <section class="section" id="research">
   <div class="container">
     <div class="section-label">Interactive Explorer</div>
@@ -536,47 +545,32 @@ footer {
 
     <div class="filter-container" id="researchFilters">
       <button class="filter-btn active" data-filter="all">All Focus Areas</button>
-      <button class="filter-btn" data-filter="photo">Photocatalysis</button>
-      <button class="filter-btn" data-filter="energy">Energy Storage</button>
-      <button class="filter-btn" data-filter="capture">CO₂ &amp; Iodine Capture</button>
+      <button class="filter-btn" data-filter="photocatalysis">Photocatalysis using COFs</button>
+      <button class="filter-btn" data-filter="energy">Energy Storage using COFs</button>
+      <button class="filter-btn" data-filter="electrocatalysis">Electrocatalysis using COFs</button>
     </div>
 
     <div class="research-grid" id="researchGrid">
-      <div class="research-card" data-category="photo">
+      <div class="research-card" data-category="photocatalysis">
         <div class="research-num">01</div>
-        <h3>COF Photocatalysis</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Redox-active COF for photocatalytic organic transformation; Donor-acceptor COFs designed for solar-driven hydrogen evolution and CO₂ reduction.</p>
-      </div>
-      <div class="research-card" data-category="photo">
-        <div class="research-num">02</div>
-        <h3>Exciton &amp; Charge Dynamics</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Probing photon absorption, charge separation, and migration in conjugated frameworks.</p>
-      </div>
-      <div class="research-card" data-category="capture">
-        <div class="research-num">03</div>
-        <h3>CO₂ Capture &amp; Conversion</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Engineered porous channels for selective carbon dioxide capture and catalytic utilization.</p>
+        <h3>Photocatalysis using COFs</h3>
+        <p style="color:var(--text-muted); margin-top:8px;">Development of conjugated, linkages-engineered covalent organic frameworks for visible/red-light-driven organic transformations, solar hydrogen evolution, CO₂ photoreduction, and understanding photo-excited charge transfer kinetics.</p>
       </div>
       <div class="research-card" data-category="energy">
-        <div class="research-num">04</div>
-        <h3>Energy Storage</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Redox-active COF for energy storage.</p>
+        <div class="research-num">02</div>
+        <h3>Energy Storage using COFs</h3>
+        <p style="color:var(--text-muted); margin-top:8px;">Design of redox-active and side-chain-functionalized COFs (e.g., diketopyrrolopyrrole and dithiophenedione-based frameworks) for high-performance lithium-ion batteries, lithium-sulfur batteries, and supercapacitors.</p>
       </div>
-      <div class="research-card" data-category="capture">
-        <div class="research-num">05</div>
-        <h3>Iodine Capture</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Targeted porous adsorbents for radioactive iodine sequestration and environmental cleanup.</p>
-      </div>
-      <div class="research-card" data-category="photo">
-        <div class="research-num">06</div>
-        <h3>Electrocatalysis</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Conjugated redox-active COF for efficient metal-free oxygen reduction reactions.</p>
+      <div class="research-card" data-category="electrocatalysis">
+        <div class="research-num">03</div>
+        <h3>Electrocatalysis using COFs</h3>
+        <p style="color:var(--text-muted); margin-top:8px;">Engineering noble-metal-free, redox-active COFs and electrochemically robust porous architectures for oxygen reduction reactions (ORR) and energy-conversion processes.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- METRICS BAR WITH UPDATED COUNT-UP TARGET -->
+<!-- METRICS BAR -->
 <div class="metrics">
   <div class="container">
     <div class="metric-grid">
@@ -607,7 +601,7 @@ footer {
   </div>
 </section>
 
-<!-- PUBLICATIONS SECTION WITH ALL 20 PDF PAPERS -->
+<!-- PUBLICATIONS SECTION -->
 <section class="section" id="publications">
   <div class="container">
     <div class="section-label">Publications</div>
@@ -657,7 +651,7 @@ footer {
 </footer>
 
 <script>
-  /* UNABRIDGED COMPLETE DATASET WITH ALL 20 PDF PUBLICATIONS */
+  /* UNABRIDGED COMPLETE DATASET WITH ALL PUBLICATIONS */
   var SITE_DATA = {
     email: "bikash.mishra@bose.res.in",
     orcidId: "0009-0003-5490-6537",
@@ -668,7 +662,7 @@ footer {
     
     announcements: [
       { text: "🎓 Final-year PhD candidate — actively seeking postdoctoral positions.", link: "#contact", linkText: "Get in touch →" },
-      { text: "📄 New paper accepted in Sci. Adv. (2026) on Redox Active COFs.", link: "#publications", linkText: "See publications →" },
+      { text: "📄 New paper accepted in Sci. Adv. (2026) on Redox Active COFs for Electrocatalysis.", link: "#publications", linkText: "See publications →" },
       { text: "🔬 New work in Adv. Mater. (2026) on Diketopyrrolopyrrole COFs for Li-Ion batteries.", link: "#research", linkText: "Read more →" }
     ],
     education: [
@@ -871,21 +865,26 @@ footer {
     });
   }
 
-  /* RESEARCH CATEGORY FILTER LOGIC */
+  /* RESEARCH CATEGORY FILTER LOGIC WITH BLUR EFFECT */
   const filterBtns = document.querySelectorAll('.filter-btn');
   const researchCards = document.querySelectorAll('.research-card');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      // 1. Update active button style
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      
       const cat = btn.getAttribute('data-filter');
 
+      // 2. Apply blur filter to unselected cards
       researchCards.forEach(card => {
-        if (cat === 'all' || card.getAttribute('data-category') === cat) {
-          card.style.display = 'block';
+        const cardCategory = card.getAttribute('data-category');
+        
+        if (cat === 'all' || cardCategory === cat) {
+          card.classList.remove('is-blurred');
         } else {
-          card.style.display = 'none';
+          card.classList.add('is-blurred');
         }
       });
     });
@@ -1041,8 +1040,8 @@ footer {
 
   renderPubs('');
 
-  /* TYPEWRITER EFFECT */
-  var typedWords = ["Photocatalysis", "CO₂ Capture", "Energy Storage", "Iodine Capture"];
+  /* TYPEWRITER EFFECT EXCLUSIVELY FOR THE 3 SPECIFIED FOCUS AREAS */
+  var typedWords = ["Photocatalysis", "Energy Storage", "Electrocatalysis"];
   var typedEl = document.getElementById('typedWord');
   var wordIdx = 0, charIdx = 0, isDeleting = false;
   function typeEffect() {
