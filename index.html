@@ -301,11 +301,18 @@ I focus on the rational design of functional porous frameworks. By combining org
       { text: "📄 New paper accepted in Sci. Adv. (2026) on Redox Active COFs.", link: "#publications", linkText: "See publications →" },
       { text: "🔬 New work in Adv. Mater. (2026) on Diketopyrrolopyrrole COFs for Li-Ion batteries.", link: "#research", linkText: "Read more →" }
     ],
-   education: [
-      { year: "2022–Present", title: "PhD, Chemical Sciences", details: "S. N. Bose National Centre for Basic Sciences, Kolkata", supervisor: "Dr. Pradip Pachfule"},
-      { year: "2019–2021", title: "M.Sc., Organic Chemistry", details: "Banaras Hindu University (BHU), Varanasi", supervisor: "Prof. Ganesh Pandey"},
-      { year: "2016–2019", title: "B.Sc., Chemistry (Honours)", details: "Sidho-Kanho-Birsha University, Purulia"}
-    ],
+  // 1. UPDATE YOUR SITE_DATA.education ARRAY
+education: [
+  { year: "2022–Present", title: "PhD, Chemical Sciences", details: "S. N. Bose National Centre for Basic Sciences, Kolkata", supervisor: "Dr. Pradip Pachfule" },
+  { year: "2019–2021", title: "M.Sc., Organic Chemistry", details: "Banaras Hindu University (BHU), Varanasi", supervisor: "Prof. / Dr. Supervisor Name" },
+  { year: "2016–2019", title: "B.Sc., Chemistry (Honours)", details: "Sidho-Kanho-Birsha University, Purulia", supervisor: "Department Faculty" }
+],
+
+// 2. UPDATE THE RENDERING SCRIPT IN DOMContentLoaded
+document.getElementById('education-list').innerHTML = SITE_DATA.education.map(function(e) {
+  var supervisorHtml = e.supervisor ? '<div class="tl-supervisor" style="font-size:13.5px; font-weight:600; color:#126b78; margin-top:4px;">Supervisor: ' + e.supervisor + '</div>' : '';
+  return '<div class="tl-item"><div class="tl-when">' + e.year + '</div><div><h3>' + e.title + '</h3><p>' + e.details + '</p>' + supervisorHtml + '</div></div>';
+}).join('');
     publications: [
       { title: "Visible-Light-Mediated Nitrogen Insertion for the Skeletal Editing by Covalent Organic Framework", authors: "Bikash Mishra†, B. Mondal†, M. Roy, S. Dutta, S. Mondal, A. Banerjee, P. Pachfule*, D. Adhikari*", journal: "Manuscript under preparation", badge: "PREP", doi: "#" },
       { title: "Modulating the Local Reaction Microenvironment on Covalent Organic Frameworks for Photocatalytic CO₂ Reduction to Tunable Syngas Generation", authors: "S. Dutta†, Bikash Mishra†, S. Ghosh, R. Thapa, P. Pachfule*", journal: "Manuscript under preparation", badge: "PREP", doi: "https://doi.org/10.1039/D6NR02474B" },
