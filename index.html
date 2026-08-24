@@ -1,5 +1,5 @@
 <!-- ============================================================
-     BIKASH MISHRA — ACADEMIC PORTFOLIO
+     BIKASH MISHRA — ACADEMIC PORTFOLIO (LIGHT THEME)
      Focus: Photocatalysis, Energy Storage, and Electrocatalysis using COFs
      ============================================================ -->
 <!DOCTYPE html>
@@ -14,14 +14,14 @@
 
 <style>
 :root {
-  --bg-primary: #0a0f1d;
-  --bg-card: rgba(18, 28, 45, 0.65);
-  --accent: #00f2fe;
-  --accent-glow: rgba(0, 242, 254, 0.4);
-  --accent-secondary: #7928ca;
-  --text-main: #f0f4f8;
-  --text-muted: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.08);
+  --bg-primary: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --accent: #0284c7;
+  --accent-glow: rgba(2, 132, 199, 0.25);
+  --accent-secondary: #7c3aed;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-color: rgba(0, 0, 0, 0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +68,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 15, 29, 0.75);
+  background: rgba(248, 250, 252, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
@@ -85,7 +85,7 @@ body {
   font-weight: 900;
   font-size: 18px;
   letter-spacing: 1px;
-  background: linear-gradient(135deg, #fff, var(--accent));
+  background: linear-gradient(135deg, #0f172a, var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -108,13 +108,13 @@ body {
   height: 2px;
   background: var(--accent);
   transition: width 0.3s ease;
-  box-shadow: 0 0 8px var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
 /* TICKER BANNER */
 .ticker {
-  background: rgba(0, 242, 254, 0.05);
+  background: rgba(2, 132, 199, 0.05);
   border-bottom: 1px solid var(--border-color);
   font-size: 13px;
 }
@@ -128,7 +128,7 @@ body {
 }
 .ticker-badge {
   background: var(--accent);
-  color: #000;
+  color: #fff;
   padding: 2px 8px;
   border-radius: 4px;
   font-weight: 800;
@@ -159,12 +159,12 @@ body {
   font-weight: 800;
   letter-spacing: 2px;
   color: var(--accent);
-  background: rgba(0, 242, 254, 0.1);
+  background: rgba(2, 132, 199, 0.08);
   padding: 6px 16px;
   border-radius: 30px;
-  border: 1px solid rgba(0, 242, 254, 0.3);
+  border: 1px solid rgba(2, 132, 199, 0.25);
   margin-bottom: 20px;
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+  box-shadow: 0 0 15px rgba(2, 132, 199, 0.1);
 }
 h1 {
   font-size: clamp(40px, 5vw, 64px);
@@ -181,7 +181,7 @@ h1 {
 .typed { color: var(--accent); border-bottom: 2px solid var(--accent); }
 .description {
   font-size: 16px;
-  color: #a0aec0;
+  color: var(--text-muted);
   max-width: 600px;
   margin-bottom: 35px;
 }
@@ -200,16 +200,16 @@ h1 {
 }
 .btn-primary {
   background: var(--accent);
-  color: #040914;
-  box-shadow: 0 0 20px var(--accent-glow);
+  color: #ffffff;
+  box-shadow: 0 4px 15px var(--accent-glow);
   border: none;
 }
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 0 30px var(--accent);
+  box-shadow: 0 6px 20px var(--accent-glow);
 }
 .btn-outline {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.8);
   color: var(--text-main);
   border: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
@@ -228,14 +228,14 @@ h1 {
   margin: auto;
   padding: 3px;
   border-radius: 28px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-secondary), #00f2fe);
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary), #38bdf8);
   background-size: 300% 300%;
   animation: holoGradient 6s ease infinite;
-  box-shadow: 0 0 30px rgba(0, 242, 254, 0.25);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.15);
   transition: box-shadow 0.4s ease;
 }
 .holo-frame-wrapper:hover {
-  box-shadow: 0 0 50px rgba(0, 242, 254, 0.5), 0 0 20px rgba(121, 40, 202, 0.4);
+  box-shadow: 0 15px 40px rgba(2, 132, 199, 0.25), 0 0 20px rgba(124, 58, 237, 0.2);
 }
 @keyframes holoGradient {
   0% { background-position: 0% 50%; }
@@ -246,7 +246,7 @@ h1 {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  background: #090e1a;
+  background: #ffffff;
   border-radius: 25px;
   overflow: hidden;
 }
@@ -263,7 +263,7 @@ h1 {
 .holo-glare {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(125deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%, rgba(0,242,254,0.1) 100%);
+  background: linear-gradient(125deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 40%, rgba(2,132,199,0.08) 100%);
   pointer-events: none;
   z-index: 2;
 }
@@ -292,7 +292,7 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
   padding: 8px 18px;
   border-radius: 20px;
   border: 1px solid var(--border-color);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.8);
   font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
@@ -301,9 +301,9 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
 }
 .filter-btn:hover, .filter-btn.active {
   background: var(--accent);
-  color: #040914;
+  color: #ffffff;
   border-color: var(--accent);
-  box-shadow: 0 0 15px var(--accent-glow);
+  box-shadow: 0 4px 12px var(--accent-glow);
 }
 
 .research-grid {
@@ -316,12 +316,13 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
 }
 .research-card:hover {
   transform: translateY(-5px);
   border-color: var(--accent);
-  box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12);
 }
 
 /* BLUR EFFECT FOR UNSELECTED CARDS */
@@ -341,7 +342,7 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
 
 /* METRICS BAR */
 .metrics {
-  background: rgba(0, 242, 254, 0.02);
+  background: rgba(2, 132, 199, 0.03);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   padding: 60px 0;
@@ -356,7 +357,6 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
   font-size: 48px;
   font-weight: 900;
   color: var(--accent);
-  text-shadow: 0 0 20px var(--accent-glow);
 }
 .metric-label {
   color: var(--text-muted);
@@ -385,18 +385,19 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
   width: 100%;
   padding: 16px 24px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--border-color);
-  color: #fff;
+  color: var(--text-main);
   font-size: 15px;
   outline: none;
   margin-bottom: 30px;
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
   transition: all 0.3s ease;
 }
 .search-box:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 20px var(--accent-glow);
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
 .pub-item {
@@ -407,9 +408,9 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
   align-items: start;
 }
 .pub-tag {
-  background: rgba(0, 242, 254, 0.1);
+  background: rgba(2, 132, 199, 0.1);
   color: var(--accent);
-  border: 1px solid rgba(0, 242, 254, 0.3);
+  border: 1px solid rgba(2, 132, 199, 0.25);
   padding: 6px 12px;
   border-radius: 8px;
   font-weight: 800;
@@ -439,7 +440,8 @@ h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
   border: 1px solid var(--border-color);
   border-radius: 12px;
   text-decoration: none;
-  color: #fff;
+  color: var(--text-main);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
   transition: 0.3s ease;
 }
 .ccard:hover {
@@ -454,6 +456,7 @@ footer {
   padding: 40px 0;
   color: var(--text-muted);
   font-size: 14px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 @media(max-width: 850px) {
@@ -513,7 +516,7 @@ footer {
         </div>
       </div>
       
-      <!-- Holographic Glassmorphism Profile Frame -->
+      <!-- Holographic Profile Frame -->
       <div class="holo-frame-wrapper tilt-card">
         <div class="hero-photo-card">
           <div class="holo-glare"></div>
@@ -529,8 +532,8 @@ footer {
   <div class="container">
     <div class="section-label">About</div>
     <h2>Research Scholar in Materials Chemistry</h2>
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px);">
-      <p style="font-size: 17px; color: #cbd5e1; max-width: 900px;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+      <p style="font-size: 17px; color: var(--text-muted); max-width: 900px;">
        My research focuses on the rational design and synthesis of functional Covalent Organic Frameworks (COFs) for photocatalytic applications—including organic transformations, CO₂ reduction, and hydrogen generation—as well as electrocatalysis and next-generation energy storage platforms such as lithium-ion batteries. Central to this work is establishing clear structure–property–performance relationships to advance sustainable energy solutions.
       </p>
     </div>
@@ -595,7 +598,7 @@ footer {
   <div class="container">
     <div class="section-label">Education</div>
     <h2>Academic Journey</h2>
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
       <div id="education-list"></div>
     </div>
   </div>
@@ -921,7 +924,7 @@ footer {
     }
   });
 
-  /* THREE.JS BACKGROUND PARTICLE CANVAS */
+  /* THREE.JS BACKGROUND PARTICLE CANVAS (Updated for high-contrast visibility on white background) */
   const bgScene = new THREE.Scene();
   const bgCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const bgRenderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-bg'), alpha: true, antialias: true });
@@ -933,7 +936,7 @@ footer {
   for(let i=0; i<particleCount*3; i++) { positions[i] = (Math.random() - 0.5) * 15; }
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-  const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ size: 0.035, color: 0x00f2fe, transparent: true, opacity: 0.5 }));
+  const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ size: 0.035, color: 0x0284c7, transparent: true, opacity: 0.35 }));
   bgScene.add(particles);
   bgCamera.position.z = 5;
 
@@ -979,7 +982,7 @@ footer {
         vy: (Math.random() - 0.5) * 1.5,
         size: Math.random() * 3 + 1,
         alpha: 1,
-        color: Math.random() > 0.3 ? '#00f2fe' : '#7928ca'
+        color: Math.random() > 0.3 ? '#0284c7' : '#7c3aed'
       });
     }
   });
