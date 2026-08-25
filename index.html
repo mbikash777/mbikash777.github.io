@@ -1,56 +1,107 @@
-<!-- ============================================================
-     BIKASH MISHRA — ACADEMIC PORTFOLIO (LIGHT THEME)
-     Focus: Photocatalysis, Energy Storage, and Electrocatalysis using COFs
-     ============================================================ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bikash Mishra | PhD Scholar & Materials Chemist</title>
+
+<title>Bikash Mishra — Materials Chemistry & COF Research</title>
+
+<meta name="description"
+      content="Academic portfolio of Bikash Mishra — researcher in Covalent Organic Frameworks, photocatalysis, electrocatalysis and energy storage.">
 
 <!-- Three.js library for high-performance 3D background -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
+/* ============================================================
+   BIKASH MISHRA — CREATIVE ACADEMIC PORTFOLIO
+   ============================================================ */
+
 :root {
-  --bg-primary: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.85);
-  --accent: #0284c7;
-  --accent-glow: rgba(2, 132, 199, 0.25);
-  --accent-secondary: #7c3aed;
-  --text-main: #0f172a;
-  --text-muted: #475569;
-  --border-color: rgba(0, 0, 0, 0.08);
+  /* WHITISH BACKGROUND SYSTEM */
+  --bg: #fafafa;
+  --bg-soft: #f4f6f9;
+  --white: #ffffff;
+  --ink: #08111f;
+  --muted: #64748b;
+
+  --cyan: #00a6d6;
+  --blue: #2563eb;
+  --violet: #7c3aed;
+  --green: #10b981;
+
+  --teal: #00a878;
+  --teal-bg: #e6f7f2;
+  --teal-border: #b3e6d8;
+
+  --line: rgba(8,17,31,.08);
+  --glass: rgba(255,255,255,.85);
+
+  --shadow: 0 20px 60px rgba(15,23,42,.06);
+  --radius: 22px;
+
+  --max: 1280px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 120px;
 }
 
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  line-height: 1.6;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(0,166,214,.04), transparent 30%),
+    radial-gradient(circle at 90% 20%, rgba(124,58,237,.03), transparent 30%),
+    var(--bg);
+
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
-/* Background Canvas */
+body.modal-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+button {
+  border: 0;
+}
+
+::selection {
+  background: var(--cyan);
+  color: white;
+}
+
+/* ============================================================
+   BACKGROUND CANVAS
+   ============================================================ */
+
 #webgl-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: -5;
   pointer-events: none;
 }
 
-/* Cursor Trail Canvas Overlay */
 #cursor-canvas {
   position: fixed;
   top: 0;
@@ -61,73 +112,189 @@ body {
   pointer-events: none;
 }
 
-.container { max-width: 1200px; margin: auto; padding: 0 28px; }
-
-/* GLASSMORPHISM NAV BAR */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(248, 250, 252, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-color);
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: .02;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
 }
-.nav-row {
-  max-width: 1200px;
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.container {
+  width: min(var(--max), calc(100% - 48px));
   margin: auto;
-  padding: 18px 28px;
+}
+
+section {
+  position: relative;
+}
+
+.section {
+  padding: 120px 0;
+}
+
+.section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  margin-bottom: 12px;
+}
+
+.section-kicker::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg,var(--cyan),var(--violet));
+}
+
+.section-title {
+  font-size: clamp(36px,5vw,64px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin-bottom: 18px;
+}
+
+.section-description {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+/* ============================================================
+   NAV & TICKER BAR
+   ============================================================ */
+
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 500;
+}
+
+.nav {
+  width: 100%;
+  border-bottom: 1px solid transparent;
+
+  transition:
+    background .4s ease,
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.nav-wrapper.scrolled .nav {
+  background: rgba(250,250,250,.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: var(--line);
+  box-shadow: 0 8px 30px rgba(15,23,42,.03);
+}
+
+.nav-inner {
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.nav-logo {
-  font-weight: 900;
-  font-size: 18px;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, #0f172a, var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.nav-links { display: flex; gap: 28px; flex-wrap: wrap; }
-.nav-links a {
-  font-size: 13.5px;
-  font-weight: 700;
+
+.logo {
   text-decoration: none;
-  color: var(--text-muted);
-  transition: all 0.3s ease;
+  font-weight: 950;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: var(--cyan);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
   position: relative;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
 .nav-links a::after {
-  content: '';
+  content: "";
   position: absolute;
-  bottom: -4px;
   left: 0;
+  bottom: -8px;
+
   width: 0;
   height: 2px;
-  background: var(--accent);
-  transition: width 0.3s ease;
-  box-shadow: 0 0 8px var(--accent-glow);
-}
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
-/* TICKER BANNER */
+  background: var(--cyan);
+
+  transition: width .3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  padding: 10px 16px;
+  border-radius: 100px;
+
+  background: var(--ink);
+  color: white !important;
+}
+
+.nav-cta::after {
+  display: none;
+}
+
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  font-size: 25px;
+  cursor: pointer;
+}
+
 .ticker {
-  background: rgba(2, 132, 199, 0.05);
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(0, 166, 214, 0.05);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
   font-size: 13px;
 }
+
 .ticker-row {
-  max-width: 1200px;
+  max-width: var(--max);
   margin: auto;
-  padding: 8px 28px;
+  padding: 6px 24px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
 .ticker-badge {
-  background: var(--accent);
+  background: var(--cyan);
   color: #fff;
   padding: 2px 8px;
   border-radius: 4px;
@@ -135,334 +302,1286 @@ body {
   font-size: 10px;
   text-transform: uppercase;
 }
-.ticker-text { flex: 1; color: var(--text-muted); transition: opacity 0.4s ease; }
-.ticker-text.fade { opacity: 0; }
-.ticker-link { color: var(--accent); font-weight: 700; text-decoration: none; }
 
-/* HERO SECTION */
+.ticker-text { 
+  flex: 1; 
+  color: var(--muted); 
+  transition: opacity 0.4s ease; 
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.ticker-text.fade { opacity: 0; }
+.ticker-link { color: var(--cyan); font-weight: 700; text-decoration: none; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
 .hero {
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  position: relative;
-  padding: 60px 0;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
-  align-items: center;
-}
-.hero-tag {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--accent);
-  background: rgba(2, 132, 199, 0.08);
-  padding: 6px 16px;
-  border-radius: 30px;
-  border: 1px solid rgba(2, 132, 199, 0.25);
-  margin-bottom: 20px;
-  box-shadow: 0 0 15px rgba(2, 132, 199, 0.1);
-}
-h1 {
-  font-size: clamp(40px, 5vw, 64px);
-  line-height: 1.1;
-  font-weight: 900;
-  margin-bottom: 15px;
-  letter-spacing: -1px;
-}
-.subtitle {
-  font-size: 22px;
-  color: var(--text-muted);
-  margin-bottom: 25px;
-}
-.typed { color: var(--accent); border-bottom: 2px solid var(--accent); }
-.description {
-  font-size: 16px;
-  color: var(--text-muted);
-  max-width: 600px;
-  margin-bottom: 35px;
-}
-.buttons { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn {
-  padding: 12px 24px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.btn-primary {
-  background: var(--accent);
-  color: #ffffff;
-  box-shadow: 0 4px 15px var(--accent-glow);
-  border: none;
-}
-.btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 6px 20px var(--accent-glow);
-}
-.btn-outline {
-  background: rgba(255, 255, 255, 0.8);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
-}
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-3px);
+  padding-top: 120px;
 }
 
-/* Holographic Profile Frame */
-.holo-frame-wrapper {
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 7px 13px;
+  border: 1px solid var(--teal-border);
+  background: var(--teal-bg);
+
+  border-radius: 100px;
+
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  margin-bottom: 22px;
+}
+
+.availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 4px rgba(0, 168, 120, 0.2);
+}
+
+.hero h1 {
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: .95;
+  letter-spacing: -3px;
+  font-weight: 950;
+  margin-bottom: 25px;
+  white-space: nowrap;
+}
+
+.hero h1 span {
+  display: inline;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--ink) 0%,
+      var(--cyan) 60%,
+      var(--violet) 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-role {
+  font-size: clamp(18px, 2.4vw, 30px);
+  font-weight: 700;
+  margin-bottom: 22px;
+  white-space: nowrap;
+}
+
+.hero-role span {
+  color: var(--cyan);
+  border-bottom: 2px solid var(--cyan);
+}
+
+.hero-copy {
+  max-width: 690px;
+  color: var(--muted);
+  font-size: 17px;
+  margin-bottom: 32px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 11px 22px;
+  border-radius: 10px;
+
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 700;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease,
+    border-color .2s ease;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: white;
+  border: 1px solid var(--ink);
+  box-shadow: 0 4px 12px rgba(8,17,31,.1);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,166,214,.25);
+}
+
+.btn-light {
+  background: white;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.btn-light:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+/* HERO VISUAL */
+
+.hero-visual {
   position: relative;
+  max-width: 440px;
   width: 100%;
-  max-width: 420px;
-  margin: auto;
-  padding: 3px;
-  border-radius: 28px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-secondary), #38bdf8);
+  margin-left: auto;
+}
+
+.profile-orbit {
+  position: absolute;
+  inset: -40px;
+
+  border: 1px dashed rgba(0,166,214,.25);
+  border-radius: 50%;
+
+  animation: orbitSpin 25s linear infinite;
+}
+
+.profile-orbit::before,
+.profile-orbit::after {
+  content: "";
+  position: absolute;
+
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+
+  background: var(--cyan);
+  box-shadow: 0 0 25px var(--cyan);
+}
+
+.profile-orbit::before {
+  top: 10%;
+  right: 5%;
+}
+
+.profile-orbit::after {
+  bottom: 12%;
+  left: 4%;
+  background: var(--violet);
+  box-shadow: 0 0 25px var(--violet);
+}
+
+@keyframes orbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.profile-frame {
+  position: relative;
+  z-index: 2;
+
+  padding: 5px;
+
+  border-radius: 32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--cyan),
+      var(--violet),
+      #38bdf8,
+      var(--cyan)
+    );
+
   background-size: 300% 300%;
-  animation: holoGradient 6s ease infinite;
-  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.15);
-  transition: box-shadow 0.4s ease;
+
+  animation: gradientFlow 8s ease infinite;
+
+  box-shadow:
+    0 40px 90px rgba(0,166,214,.12);
 }
-.holo-frame-wrapper:hover {
-  box-shadow: 0 15px 40px rgba(2, 132, 199, 0.25), 0 0 20px rgba(124, 58, 237, 0.2);
-}
-@keyframes holoGradient {
+
+@keyframes gradientFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-.hero-photo-card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: #ffffff;
-  border-radius: 25px;
+
+.profile-inner {
+  background: white;
+  border-radius: 28px;
   overflow: hidden;
+  aspect-ratio: 1 / 1;
 }
-.profile-img {
+
+.profile-inner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  transition: transform 0.5s ease;
+  transition: transform .7s ease;
 }
-.holo-frame-wrapper:hover .profile-img {
+
+.profile-frame:hover img {
   transform: scale(1.05);
 }
-.holo-glare {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(125deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 40%, rgba(2,132,199,0.08) 100%);
-  pointer-events: none;
-  z-index: 2;
-}
 
-/* TILT CARDS */
-.tilt-card {
-  transition: transform 0.2s ease-out;
-  transform-style: preserve-3d;
-}
+/* ============================================================
+   ABOUT
+   ============================================================ */
 
-/* SECTIONS */
-.section { padding: 90px 0; position: relative; }
-.section-label {
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-h2 { font-size: 38px; font-weight: 800; margin-bottom: 35px; }
-
-/* RESEARCH FILTERS & GRID WITH BLUR CAPABILITY */
-.filter-container { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-.filter-btn {
-  padding: 8px 18px;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  background: rgba(255, 255, 255, 0.8);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-.filter-btn:hover, .filter-btn.active {
-  background: var(--accent);
-  color: #ffffff;
-  border-color: var(--accent);
-  box-shadow: 0 4px 12px var(--accent-glow);
-}
-
-.research-grid {
+.about-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-}
-.research-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
-}
-.research-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12);
-}
-
-/* BLUR EFFECT FOR UNSELECTED CARDS */
-.research-card.is-blurred {
-  filter: blur(5px);
-  opacity: 0.35;
-  pointer-events: none;
-  transform: scale(0.98);
-}
-
-.research-num {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-/* METRICS BAR */
-.metrics {
-  background: rgba(2, 132, 199, 0.03);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  padding: 60px 0;
-}
-.metric-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-  text-align: center;
-}
-.metric-num {
-  font-size: 48px;
-  font-weight: 900;
-  color: var(--accent);
-}
-.metric-label {
-  color: var(--text-muted);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-
-/* TIMELINE & EDUCATION */
-.tl-item {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 24px;
-  padding: 24px 0;
-  border-top: 1px solid var(--border-color);
-}
-.tl-item:first-child { border-top: none; }
-.tl-when { font-size: 14px; font-weight: 800; color: var(--accent); }
-.tl-supervisor { margin-top: 6px; font-size: 14px; color: var(--text-muted); }
-.tl-supervisor a { color: var(--accent); text-decoration: none; }
-.tl-supervisor a:hover { text-decoration: underline; }
-
-/* PUBLICATIONS */
-.pub-legend { font-size: 12.5px; color: var(--text-muted); margin-bottom: 15px; }
-.search-box {
-  width: 100%;
-  padding: 16px 24px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  font-size: 15px;
-  outline: none;
-  margin-bottom: 30px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-  transition: all 0.3s ease;
-}
-.search-box:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 15px var(--accent-glow);
-}
-
-.pub-item {
-  display: flex;
-  gap: 20px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--border-color);
+  grid-template-columns: .7fr 1.3fr;
+  gap: 70px;
   align-items: start;
 }
-.pub-tag {
-  background: rgba(2, 132, 199, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(2, 132, 199, 0.25);
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-weight: 800;
-  font-size: 12px;
-  height: fit-content;
-  flex-shrink: 0;
-}
-.pub-title { font-size: 16.5px; font-weight: 700; color: var(--text-main); }
-.pub-authors { font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
-.pub-meta { font-size: 12.5px; font-weight: 700; color: var(--accent); margin-top: 6px; }
-.pub-meta a { color: var(--accent); text-decoration: none; }
-.pub-meta a:hover { text-decoration: underline; }
 
-/* CONTACT */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
+.about-big {
+  font-size: clamp(26px,3vw,40px);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -1.5px;
 }
-.ccard {
+
+.about-big span {
+  color: var(--cyan);
+}
+
+.about-text {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 800px;
+}
+
+.research-tags {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 25px;
+}
+
+.research-tags span {
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 800;
+  background: white;
+}
+
+/* ============================================================
+   EDUCATION
+   ============================================================ */
+
+.timeline {
+  margin-top: 50px;
+  border-top: 1px solid var(--line);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+
+  padding: 30px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.timeline-year {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.timeline-content h3 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.timeline-content p {
+  color: var(--muted);
+}
+
+.supervisor {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.supervisor a {
+  color: var(--cyan);
+  font-weight: 800;
   text-decoration: none;
-  color: var(--text-main);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-  transition: 0.3s ease;
 }
-.ccard:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px var(--accent-glow);
+
+/* ============================================================
+   RESEARCH AREAS
+   ============================================================ */
+
+.research-showcase {
+  margin-top: 55px;
+
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
 }
-.ccard svg { width: 22px; height: 22px; color: var(--accent); flex-shrink: 0; }
+
+.research-tile {
+  min-height: 340px;
+
+  position: relative;
+  overflow: hidden;
+
+  padding: 30px;
+
+  border-radius: var(--radius);
+
+  background: white;
+  border: 1px solid var(--line);
+
+  box-shadow: 0 8px 35px rgba(15,23,42,.03);
+
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    box-shadow .45s ease;
+}
+
+.research-tile:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(15,23,42,.08);
+}
+
+.tile-number {
+  font-size: 13px;
+  color: var(--cyan);
+  font-weight: 950;
+}
+
+.tile-icon {
+  width: 70px;
+  height: 70px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 50px 0 30px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,166,214,.10),
+      rgba(124,58,237,.10)
+    );
+
+  font-size: 30px;
+}
+
+.research-tile h3 {
+  font-size: 22px;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.research-tile p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tile-glow {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -80px;
+  bottom: -80px;
+
+  border-radius: 50%;
+
+  background: var(--cyan);
+  filter: blur(60px);
+  opacity: .12;
+}
+
+/* ============================================================
+   METRICS
+   ============================================================ */
+
+.metrics {
+  padding: 65px 0;
+
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+
+  background: rgba(255,255,255,.8);
+  backdrop-filter: blur(12px);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.metric {
+  text-align: center;
+}
+
+.metric-number {
+  font-size: clamp(38px,5vw,64px);
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -3px;
+  color: var(--ink);
+}
+
+.metric-label {
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+/* ============================================================
+   PUBLICATIONS SECTION & SPOTLIGHT CAROUSEL
+   ============================================================ */
+
+.publications-section {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+}
+
+.pub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.pub-counter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px rgba(8,17,31,0.03);
+}
+
+.pub-counter-badge strong {
+  font-size: 32px;
+  font-weight: 950;
+  line-height: 1;
+  background: linear-gradient(90deg, var(--ink) 0%, var(--cyan) 60%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pub-counter-badge span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* SPOTLIGHT CAROUSEL CONTAINER */
+.spotlight-carousel-container {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.spotlight-viewport {
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.spotlight-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+}
+
+.spotlight-slide {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  color: var(--ink);
+  background: var(--white);
+}
+
+.featured-art {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 30%, rgba(0,166,214,0.08), transparent 70%),
+              radial-gradient(circle at 70% 70%, rgba(124,58,237,0.06), transparent 70%),
+              #f8fafc;
+}
+
+.featured-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M20 20l20 20M0 40l20-20' stroke='rgba(8,17,31,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.featured-cover {
+  width: 220px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  z-index: 2;
+  box-shadow: 0 15px 35px rgba(8, 17, 31, 0.12);
+  transform: rotate(-3deg) translateY(0);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.spotlight-slide:hover .featured-cover {
+  transform: rotate(0deg) scale(1.04) translateY(-8px);
+}
+
+.featured-info {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.featured-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: var(--teal-bg);
+  border: 1px solid var(--teal-border);
+  color: var(--teal);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  width: fit-content;
+}
+
+.featured-info h3 {
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.35;
+  font-weight: 800;
+  margin-bottom: 14px;
+  background: linear-gradient(90deg, var(--ink) 0%, var(--cyan) 60%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.featured-authors {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.author-highlight {
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.featured-journal {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+/* CAROUSEL CONTROLS */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  border: 1px solid var(--line);
+}
+
+.carousel-btn:hover {
+  background: var(--ink);
+  color: white;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-btn.prev { left: -22px; }
+.carousel-btn.next { right: -22px; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(8, 17, 31, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: var(--cyan);
+  width: 28px;
+  border-radius: 100px;
+}
+
+/* FILTER TOOLBAR */
+.pub-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 12px 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+}
+
+.pub-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pub-filter {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.pub-filter:hover {
+  color: var(--ink);
+}
+
+.pub-filter.active {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+.pub-search-wrapper {
+  position: relative;
+  min-width: 260px;
+}
+
+.pub-search {
+  width: 100%;
+  padding: 8px 16px 8px 38px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.pub-search:focus {
+  border-color: var(--cyan);
+  background: var(--white);
+}
+
+.pub-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* CARD-STYLE PUBLICATION LIST */
+.pub-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pub-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.pub-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan);
+  box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.06);
+}
+
+.pub-tag {
+  display: inline-block;
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--teal);
+  background-color: var(--teal-bg);
+  border: 1px solid var(--teal-border);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.pub-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  background: linear-gradient(90deg, var(--ink) 0%, var(--cyan) 60%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.pub-authors {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.pub-journal {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.pub-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.no-results {
+  padding: 60px 20px;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  color: var(--muted);
+}
+
+/* ============================================================
+   PUBLICATION MODAL
+   ============================================================ */
+
+.pub-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: none;
+
+  padding: 30px;
+
+  background: rgba(4,10,20,.82);
+  backdrop-filter: blur(20px);
+
+  align-items: center;
+  justify-content: center;
+}
+
+.pub-modal.open {
+  display: flex;
+}
+
+.modal-panel {
+  width: min(1100px,100%);
+  max-height: 90vh;
+
+  overflow: auto;
+
+  display: grid;
+  grid-template-columns: .75fr 1.25fr;
+
+  border-radius: 25px;
+
+  background: white;
+
+  box-shadow:
+    0 50px 120px rgba(0,0,0,.35);
+
+  animation: modalIn .45s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modal-cover {
+  min-height: 500px;
+  padding: 40px;
+
+  display: grid;
+  place-items: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,166,214,.18),
+      transparent 60%
+    ),
+    #f0f4f8;
+}
+
+.modal-cover img {
+  max-width: 100%;
+  max-height: 500px;
+
+  object-fit: contain;
+
+  box-shadow: 15px 25px 50px rgba(15,23,42,.18);
+}
+
+.modal-info {
+  padding: 60px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+
+  right: 25px;
+  top: 25px;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #f1f5f9;
+
+  cursor: pointer;
+
+  font-size: 20px;
+}
+
+.modal-info .modal-category {
+  color: var(--cyan);
+
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 2px;
+
+  margin-bottom: 15px;
+}
+
+.modal-info h3 {
+  font-size: clamp(28px,4vw,48px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+
+  margin-bottom: 20px;
+}
+
+.modal-authors {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.modal-authors strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.modal-journal {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.modal-description {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.modal-link {
+  display: inline-flex;
+
+  margin-top: 30px;
+
+  padding: 12px 18px;
+
+  background: var(--ink);
+  color: white;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+
+.contact-box {
+  position: relative;
+  overflow: hidden;
+
+  padding: 70px;
+
+  border-radius: 30px;
+
+  background: var(--ink);
+  color: white;
+
+  box-shadow:
+    0 40px 100px rgba(8,17,31,.16);
+}
+
+.contact-box::before {
+  content: "";
+
+  position: absolute;
+
+  width: 400px;
+  height: 400px;
+
+  right: -120px;
+  top: -180px;
+
+  border-radius: 50%;
+
+  background: var(--cyan);
+
+  filter: blur(100px);
+
+  opacity: .18;
+}
+
+.contact-box h2 {
+  position: relative;
+  z-index: 2;
+
+  max-width: 700px;
+
+  font-size: clamp(40px,6vw,80px);
+  line-height: .95;
+  letter-spacing: -4px;
+
+  margin-bottom: 25px;
+}
+
+.contact-box p {
+  position: relative;
+  z-index: 2;
+
+  color: rgba(255,255,255,.65);
+
+  max-width: 650px;
+
+  margin-bottom: 30px;
+}
+
+.contact-links {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contact-link {
+  padding: 11px 16px;
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  transition: background .3s ease;
+}
+
+.contact-link:hover {
+  background: rgba(255,255,255,.15);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
 
 footer {
-  border-top: 1px solid var(--border-color);
-  padding: 40px 0;
-  color: var(--text-muted);
-  font-size: 14px;
-  background: rgba(255, 255, 255, 0.5);
+  padding: 35px 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
 }
 
-@media(max-width: 850px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .holo-frame-wrapper { max-width: 340px; }
-  .tl-item { grid-template-columns: 1fr; gap: 8px; }
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-top: 1px solid var(--line);
+
+  padding-top: 25px;
+}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+
+  transition:
+    opacity .8s ease,
+    transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media(max-width: 950px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 20px;
+    right: 20px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: stretch;
+    background: rgba(255,255,255,.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 70px;
+  }
+
+  .hero h1,
+  .hero-role {
+    white-space: normal;
+  }
+
+  .hero-visual {
+    margin: auto;
+    width: min(100%,450px);
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .research-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .spotlight-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-art {
+    min-height: 300px;
+  }
+
+  .featured-info {
+    padding: 30px;
+  }
+
+  .carousel-btn.prev { left: 10px; }
+  .carousel-btn.next { right: 10px; }
+
+  .pub-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pub-search-wrapper {
+    min-width: 100%;
+  }
+
+  .modal-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-cover {
+    min-height: 350px;
+  }
+}
+
+@media(max-width: 620px) {
+  .container {
+    width: min(100% - 30px,var(--max));
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+    letter-spacing: -2px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 35px 10px;
+  }
+
+  .featured-info {
+    padding: 25px 20px;
+  }
+
+  .featured-info h3 {
+    font-size: 20px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .contact-box {
+    padding: 45px 25px;
+  }
+
+  .contact-box h2 {
+    letter-spacing: -2px;
+  }
+
+  .modal-info {
+    padding: 40px 25px;
+  }
+
+  .footer-row {
+    flex-direction: column;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
@@ -475,592 +1594,1212 @@ footer {
 <!-- Kinetic Cursor Trail Canvas Overlay -->
 <canvas id="cursor-canvas"></canvas>
 
-<!-- NAVBAR -->
-<nav class="nav">
-  <div class="nav-row">
-    <div class="nav-logo">BIKASH MISHRA</div>
-    <div class="nav-links">
-      <a href="#about" class="nav-item">About</a>
-      <a href="#research" class="nav-item">Research</a>
-      <a href="#education" class="nav-item">Education</a>
-      <a href="#publications" class="nav-item">Publications</a>
-      <a href="#contact" class="nav-item">Contact</a>
+<div class="noise"></div>
+
+<!-- ============================================================
+     NAVIGATION & TICKER BANNER
+     ============================================================ -->
+
+<div class="nav-wrapper" id="navbarWrapper">
+
+  <nav class="nav">
+    <div class="container nav-inner">
+
+      <a href="#top" class="logo">
+        BIKASH MISHRA
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact" class="nav-cta">Connect</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle">
+        ☰
+      </button>
+
+    </div>
+  </nav>
+
+  <div class="ticker">
+    <div class="ticker-row">
+      <span class="ticker-badge">Update</span>
+      <span class="ticker-text" id="tickerText"></span>
+      <a class="ticker-link" id="tickerLink" href="#contact">Get in touch &rarr;</a>
     </div>
   </div>
-</nav>
 
-<!-- NEWS TICKER BANNER -->
-<div class="ticker">
-  <div class="ticker-row">
-    <span class="ticker-badge">Update</span>
-    <span class="ticker-text" id="tickerText"></span>
-    <a class="ticker-link" id="tickerLink" href="#contact">Get in touch &rarr;</a>
-  </div>
 </div>
 
-<!-- HERO SECTION -->
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+
+<main id="top">
+
 <section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <span class="hero-tag">PhD Candidate · S.N. Bose National Centre for Basic Sciences, Kolkata</span>
-        <h1>Bikash Mishra</h1>
-        <div class="subtitle">Designing Porous COFs for <span class="typed" id="typedWord">Photocatalysis</span></div>
-        <p class="description">
-          Specialized in the rational design, synthesis, and fundamental understanding of Covalent Organic Frameworks (COFs) for photocatalysis, energy storage, and electrocatalysis.
-        </p>
-        <div class="buttons">
-          <a class="btn btn-primary" id="btn-email" href="#">Email Me</a>
-          <a class="btn btn-outline" id="btn-scholar" href="#" target="_blank">Google Scholar</a>
-          <a class="btn btn-outline" id="btn-orcid" href="#" target="_blank">ORCID</a>
+
+  <div class="container hero-grid">
+
+    <div class="reveal">
+
+      <div class="availability">
+        <span class="availability-dot"></span>
+        PhD Candidate · Researcher
+      </div>
+
+      <h1>
+        Bikash
+        <span>Mishra</span>
+      </h1>
+
+      <div class="hero-role">
+        Designing porous materials for
+        <span id="typedWord">Photocatalysis</span>
+      </div>
+
+      <p class="hero-copy">
+        I work at the intersection of materials chemistry,
+        molecular design and sustainable energy science,
+        developing Covalent Organic Frameworks for
+        photocatalysis, energy storage and electrocatalysis.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a
+          href="mailto:bikash.mishra@bose.res.in"
+          class="btn btn-primary magnetic">
+          Email Me ↗
+        </a>
+
+        <a
+          href="https://scholar.google.com/citations?user=nTXvBBIAAAAJ&hl=en"
+          target="_blank"
+          class="btn btn-light magnetic">
+          Google Scholar ↗
+        </a>
+
+        <a
+          href="https://orcid.org/0009-0003-5490-6537"
+          target="_blank"
+          class="btn btn-light magnetic">
+          ORCID ↗
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="hero-visual reveal">
+
+      <div class="profile-orbit"></div>
+
+      <div class="profile-frame">
+
+        <div class="profile-inner">
+          <img
+            src="profile.jpg"
+            alt="Bikash Mishra">
         </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+
+<section class="section" id="about">
+
+  <div class="container">
+
+    <div class="section-kicker">About</div>
+
+    <div class="about-layout">
+
+      <div class="about-big reveal">
+        Researching the space where
+        <span>molecular architecture</span>
+        becomes function.
+      </div>
+
+      <div class="reveal">
+
+        <p class="about-text">
+          My research focuses on the rational design and synthesis
+          of functional Covalent Organic Frameworks (COFs) for
+          photocatalytic applications, electrocatalysis and
+          next-generation energy storage.
+        </p>
+
+        <p
+          class="about-text"
+          style="margin-top:20px;">
+          I am particularly interested in understanding how
+          framework topology, electronic structure, linkage
+          chemistry, local reaction environments and charge-transfer
+          processes determine macroscopic performance.
+        </p>
+
+        <div class="research-tags">
+
+          <span>COFs</span>
+          <span>Photocatalysis</span>
+          <span>CO₂ Reduction</span>
+          <span>H₂ Evolution</span>
+          <span>Electrocatalysis</span>
+          <span>ORR</span>
+          <span>Li-Ion Batteries</span>
+          <span>Li-S Batteries</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     EDUCATION (MOVED DIRECTLY AFTER ABOUT)
+     ============================================================ -->
+
+<section class="section" id="education">
+
+  <div class="container">
+
+    <div class="section-kicker">
+      Education
+    </div>
+
+    <h2 class="section-title reveal">
+      Academic journey.
+    </h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+
+        <div class="timeline-year">
+          2022 — PRESENT
+        </div>
+
+        <div class="timeline-content">
+
+          <h3>
+            PhD, Chemical Sciences
+          </h3>
+
+          <p>
+            S. N. Bose National Centre for Basic Sciences,
+            Kolkata
+          </p>
+
+          <div class="supervisor">
+            Supervisor:
+            <a
+              href="https://www.ecomcof.com/"
+              target="_blank">
+              Dr. Pradip Pachfule ↗
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="timeline-item reveal">
+
+        <div class="timeline-year">
+          2019 — 2021
+        </div>
+
+        <div class="timeline-content">
+
+          <h3>
+            M.Sc., Organic Chemistry
+          </h3>
+
+          <p>
+            Banaras Hindu University,
+            Varanasi
+          </p>
+
+          <div class="supervisor">
+            Supervisor:
+            <a
+              href="https://bhu.ac.in/Site/FacultyProfile/1_150?FA001039"
+              target="_blank">
+              Prof. Ganesh Pandey ↗
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="timeline-item reveal">
+
+        <div class="timeline-year">
+          2016 — 2019
+        </div>
+
+        <div class="timeline-content">
+
+          <h3>
+            B.Sc., Chemistry (Honours)
+          </h3>
+
+          <p>
+            Sidho-Kanho-Birsha University,
+            Purulia
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     RESEARCH
+     ============================================================ -->
+
+<section class="section" id="research">
+
+  <div class="container">
+
+    <div class="section-kicker">Research</div>
+
+    <h2 class="section-title reveal">
+      Three directions.
+      <br>
+      One materials platform.
+    </h2>
+
+    <p class="section-description reveal">
+      From photon absorption to charge transport and
+      electrochemical reactions, my work explores how
+      porous organic architectures can be engineered
+      for sustainable energy applications.
+    </p>
+
+    <div class="research-showcase">
+
+      <article class="research-tile reveal">
+
+        <div class="tile-number">01 / PHOTOCATALYSIS</div>
+
+        <div class="tile-icon">☼</div>
+
+        <h3>Photocatalysis using COFs</h3>
+
+        <p>
+          Conjugated and linkage-engineered COFs for
+          visible/red-light-driven organic transformations,
+          hydrogen evolution and CO₂ photoreduction.
+        </p>
+
+        <div class="tile-glow"></div>
+
+      </article>
+
+      <article class="research-tile reveal">
+
+        <div class="tile-number">02 / ENERGY STORAGE</div>
+
+        <div class="tile-icon">⌁</div>
+
+        <h3>Energy Storage using COFs</h3>
+
+        <p>
+          Redox-active and side-chain-functionalized
+          frameworks for lithium-ion batteries,
+          lithium-sulfur batteries and supercapacitors.
+        </p>
+
+        <div
+          class="tile-glow"
+          style="background:var(--violet)">
+        </div>
+
+      </article>
+
+      <article class="research-tile reveal">
+
+        <div class="tile-number">03 / ELECTROCATALYSIS</div>
+
+        <div class="tile-icon">⚡</div>
+
+        <h3>Electrocatalysis using COFs</h3>
+
+        <p>
+          Metal-free redox-active porous architectures
+          for oxygen reduction and other energy-conversion
+          reactions.
+        </p>
+
+        <div
+          class="tile-glow"
+          style="background:var(--green)">
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     METRICS
+     ============================================================ -->
+
+<div class="metrics">
+
+  <div class="container">
+
+    <div class="metrics-grid">
+
+      <div class="metric reveal">
+        <div
+          class="metric-number"
+          data-target="20">
+          0
+        </div>
+        <div class="metric-label">
+          PUBLICATIONS
+        </div>
+      </div>
+
+      <div class="metric reveal">
+        <div
+          class="metric-number"
+          data-target="870">
+          0
+        </div>
+        <div class="metric-label">
+          CITATIONS
+        </div>
+      </div>
+
+      <div class="metric reveal">
+        <div
+          class="metric-number"
+          data-target="10">
+          0
+        </div>
+        <div class="metric-label">
+          H-INDEX
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PUBLICATIONS SECTION
+     ============================================================ -->
+
+<section class="section publications-section" id="publications">
+  <div class="container">
+    
+    <div class="pub-header">
+      <div class="reveal">
+        <div class="section-kicker">Selected Works</div>
+        <h2 class="section-title">Publications &<br>Research Insights</h2>
       </div>
       
-      <!-- Holographic Profile Frame -->
-      <div class="holo-frame-wrapper tilt-card">
-        <div class="hero-photo-card">
-          <div class="holo-glare"></div>
-          <img src="profile.jpg" alt="Bikash Mishra" class="profile-img">
+      <div class="pub-counter-badge reveal">
+        <strong id="pubCount">12</strong>
+        <span>Peer-Reviewed<br>Papers</span>
+      </div>
+    </div>
+
+    <!-- SPOTLIGHT RESEARCH CAROUSEL (3 RECENT PAPERS) -->
+    <div class="spotlight-carousel-container reveal">
+      <button class="carousel-btn prev" id="spotlightPrev" aria-label="Previous Spotlight">&#10094;</button>
+      
+      <div class="spotlight-viewport">
+        <div class="spotlight-track" id="spotlightTrack">
+          
+          <!-- Spotlight Slide 1 -->
+          <article class="spotlight-slide">
+            <div class="featured-art">
+              <img class="featured-cover" src="cover5.jpg" alt="Publication cover 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\' viewBox=\'0 0 100 100\'%3E%3Crect fill=\'%23f8fafc\' width=\'100\' height=\'100\'/%3E%3Ctext fill=\'%2300a6d6\' font-size=\'14\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EADMA%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="featured-info">
+              <span class="featured-pill">★ SPOTLIGHT RESEARCH 1/3</span>
+              <h3>Side-Chain Modulation in Diketopyrrolopyrrole-Based Covalent Organic Frameworks for Fast and Durable Lithium-Ion Batteries</h3>
+              <p class="featured-authors"><span class="author-highlight">Bikash Mishra†</span>; Ghoshal, A.†; Dutta, S.; Ghosh, S.; Maitra, U.*; Pachfule, P.*</p>
+              <p class="featured-journal"><em>Advanced Materials</em>, 2026</p>
+              <div class="pub-actions">
+                <button class="btn btn-primary magnetic" onclick="openModal(0)">Publisher Site ↗</button>
+                <button class="btn btn-light magnetic" onclick="openModal(0)">PDF</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Spotlight Slide 2 -->
+          <article class="spotlight-slide">
+            <div class="featured-art">
+              <img class="featured-cover" src="cover11.jpg" alt="Publication cover 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\' viewBox=\'0 0 100 100\'%3E%3Crect fill=\'%23f8fafc\' width=\'100\' height=\'100\'/%3E%3Ctext fill=\'%2300a6d6\' font-size=\'14\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ECHMA%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="featured-info">
+              <span class="featured-pill">★ SPOTLIGHT RESEARCH 2/3</span>
+              <h3>A Thiazole-Linked Dithiophenedione-Functionalized Covalent Organic Framework for Photocatalytic Oxidative Dehydrogenation Reactions</h3>
+              <p class="featured-authors"><span class="author-highlight">Bikash Mishra†</span>; Maji, S.†; Roy, M.; Dutta, S.; Sinha, A.; Das, T. N.; Mondal, S.; Banerjee, A.; Thomas, A.; Pachfule, P.*; Adhikari, D.*</p>
+              <p class="featured-journal"><em>Chemistry of Materials</em>, 2025</p>
+              <div class="pub-actions">
+                <button class="btn btn-primary magnetic" onclick="openModal(3)">Publisher Site ↗</button>
+                <button class="btn btn-light magnetic" onclick="openModal(3)">PDF</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Spotlight Slide 3 -->
+          <article class="spotlight-slide">
+            <div class="featured-art">
+              <img class="featured-cover" src="cover15.jpg" alt="Publication cover 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\' viewBox=\'0 0 100 100\'%3E%3Crect fill=\'%23f8fafc\' width=\'100\' height=\'100\'/%3E%3Ctext fill=\'%2300a6d6\' font-size=\'14\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EANGW%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="featured-info">
+              <span class="featured-pill">★ SPOTLIGHT RESEARCH 3/3</span>
+              <h3>Covalent Organic Framework Catalyzed Amide Synthesis Directly from Alcohol under Red Light Excitation</h3>
+              <p class="featured-authors">Roy, M.†; <span class="author-highlight">Bikash Mishra†</span>; Maji, S.; Sinha, A.; Dutta, S.; Mondal, S.; Banerjee, A.; Pachfule, P.*; Adhikari, D.*</p>
+              <p class="featured-journal"><em>Angewandte Chemie International Edition</em>, 2024</p>
+              <div class="pub-actions">
+                <button class="btn btn-primary magnetic" onclick="openModal(7)">Publisher Site ↗</button>
+                <button class="btn btn-light magnetic" onclick="openModal(7)">PDF</button>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
+
+      <button class="carousel-btn next" id="spotlightNext" aria-label="Next Spotlight">&#10095;</button>
+      
+      <!-- Indicator Dots -->
+      <div class="carousel-dots" id="spotlightDots">
+        <span class="carousel-dot active" data-index="0"></span>
+        <span class="carousel-dot" data-index="1"></span>
+        <span class="carousel-dot" data-index="2"></span>
+      </div>
     </div>
+
+    <!-- INTERACTIVE TOOLBAR -->
+    <div class="pub-toolbar reveal">
+      <div class="pub-filters">
+        <button class="pub-filter active" data-category="all">All</button>
+        <button class="pub-filter" data-category="photocatalysis">Photocatalysis</button>
+        <button class="pub-filter" data-category="energy">Energy Storage</button>
+        <button class="pub-filter" data-category="electrocatalysis">Electrocatalysis</button>
+      </div>
+
+      <div class="pub-search-wrapper">
+        <span class="pub-search-icon">🔍</span>
+        <input class="pub-search" id="pubSearch" type="search" placeholder="Search title, author, journal...">
+      </div>
+    </div>
+
+    <!-- PUBLICATIONS CONTAINER -->
+    <div class="pub-grid" id="pubGrid"></div>
+
   </div>
 </section>
 
-<!-- ABOUT SECTION -->
-<section class="section" id="about">
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+
+<section class="section" id="contact">
+
   <div class="container">
-    <div class="section-label">About</div>
-    <h2>Research Scholar in Materials Chemistry</h2>
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
-      <p style="font-size: 17px; color: var(--text-muted); max-width: 900px;">
-       My research focuses on the rational design and synthesis of functional Covalent Organic Frameworks (COFs) for photocatalytic applications—including organic transformations, CO₂ reduction, and hydrogen generation—as well as electrocatalysis and next-generation energy storage platforms such as lithium-ion batteries. Central to this work is establishing clear structure–property–performance relationships to advance sustainable energy solutions.
+
+    <div class="contact-box reveal">
+
+      <div class="section-kicker">
+        Collaboration
+      </div>
+
+      <h2>
+        Let's build
+        something
+        meaningful.
+      </h2>
+
+      <p>
+        Interested in COFs, photocatalysis, energy storage,
+        electrocatalysis or collaborative materials research?
+        I would be happy to connect.
       </p>
+
+      <div class="contact-links">
+
+        <a
+          href="mailto:bikash.mishra@bose.res.in"
+          class="contact-link">
+          bikash.mishra@bose.res.in
+        </a>
+
+        <a
+          href="https://scholar.google.com/citations?user=nTXvBBIAAAAJ&hl=en"
+          target="_blank"
+          class="contact-link">
+          Google Scholar ↗
+        </a>
+
+        <a
+          href="https://orcid.org/0009-0003-5490-6537"
+          target="_blank"
+          class="contact-link">
+          ORCID ↗
+        </a>
+
+      </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- RESEARCH SECTION WITH DYNAMIC BLUR EFFECT -->
-<section class="section" id="research">
-  <div class="container">
-    <div class="section-label">Interactive Explorer</div>
-    <h2>Research Focus</h2>
+</main>
 
-    <div class="filter-container" id="researchFilters">
-      <button class="filter-btn active" data-filter="all">All Focus Areas</button>
-      <button class="filter-btn" data-filter="photocatalysis">Photocatalysis using COFs</button>
-      <button class="filter-btn" data-filter="energy">Energy Storage using COFs</button>
-      <button class="filter-btn" data-filter="electrocatalysis">Electrocatalysis using COFs</button>
+<!-- ============================================================
+     PUBLICATION MODAL
+     ============================================================ -->
+
+<div
+  class="pub-modal"
+  id="pubModal">
+
+  <div class="modal-panel">
+
+    <div class="modal-cover">
+
+      <img
+        id="modalCover"
+        src=""
+        alt="Publication cover">
+
     </div>
 
-    <div class="research-grid" id="researchGrid">
-      <div class="research-card" data-category="photocatalysis">
-        <div class="research-num">01</div>
-        <h3>Photocatalysis using COFs</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Development of conjugated, linkages-engineered covalent organic frameworks for visible/red-light-driven organic transformations, solar hydrogen evolution, CO₂ photoreduction, and understanding photo-excited charge transfer kinetics.</p>
+    <div class="modal-info">
+
+      <button
+        class="modal-close"
+        id="modalClose">
+        ×
+      </button>
+
+      <div
+        class="modal-category"
+        id="modalCategory">
+        PUBLICATION
       </div>
-      <div class="research-card" data-category="energy">
-        <div class="research-num">02</div>
-        <h3>Energy Storage using COFs</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Design of redox-active and side-chain-functionalized COFs (e.g., diketopyrrolopyrrole and dithiophenedione-based frameworks) for high-performance lithium-ion batteries, lithium-sulfur batteries, and supercapacitors.</p>
+
+      <h3 id="modalTitle"></h3>
+
+      <p
+        class="modal-authors"
+        id="modalAuthors">
+      </p>
+
+      <div
+        class="modal-journal"
+        id="modalJournal">
       </div>
-      <div class="research-card" data-category="electrocatalysis">
-        <div class="research-num">03</div>
-        <h3>Electrocatalysis using COFs</h3>
-        <p style="color:var(--text-muted); margin-top:8px;">Engineering noble-metal-free, redox-active COFs and electrochemically robust porous architectures for oxygen reduction reactions (ORR) and energy-conversion processes.</p>
-      </div>
+
+      <p
+        class="modal-description"
+        id="modalDescription">
+      </p>
+
+      <a
+        id="modalLink"
+        class="modal-link"
+        href="#"
+        target="_blank">
+        View Article ↗
+      </a>
+
     </div>
+
   </div>
-</section>
 
-<!-- METRICS BAR -->
-<div class="metrics">
-  <div class="container">
-    <div class="metric-grid">
-      <div>
-        <div class="metric-num" id="metric-pub" data-target="20">0</div>
-        <div class="metric-label">PUBLICATIONS</div>
-      </div>
-      <div>
-        <div class="metric-num" id="metric-cite" data-target="870">0</div>
-        <div class="metric-label">GOOGLE SCHOLAR CITATIONS</div>
-      </div>
-      <div>
-        <div class="metric-num" id="metric-hindex" data-target="10">0</div>
-        <div class="metric-label">GOOGLE SCHOLAR H-INDEX</div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<!-- EDUCATION SECTION WITH SUPERVISOR LINKS -->
-<section class="section" id="education">
-  <div class="container">
-    <div class="section-label">Education</div>
-    <h2>Academic Journey</h2>
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
-      <div id="education-list"></div>
-    </div>
-  </div>
-</section>
-
-<!-- PUBLICATIONS SECTION -->
-<section class="section" id="publications">
-  <div class="container">
-    <div class="section-label">Publications</div>
-    <h2>Searchable Research Works</h2>
-    <div class="pub-legend">† Denotes equal contribution / joint-first authorship &nbsp;|&nbsp; * Denotes corresponding authorship</div>
-    <input type="text" class="search-box" id="pubSearch" placeholder="🔍 Search papers by title, journal, author, or key terms...">
-    <div id="full-pub-list"></div>
-  </div>
-</section>
-
-<!-- CONTACT SECTION -->
-<section class="section" id="contact">
-  <div class="container">
-    <div class="section-label">Get in Touch</div>
-    <h2>Collaborate &amp; Connect</h2>
-    <div class="contact-grid">
-      <a class="ccard" id="c-email" href="#">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
-        <div>
-          <div style="font-weight:700;">Email</div>
-          <div id="c-email-val" style="font-size:13px; color:var(--text-muted);">bikash.mishra@bose.res.in</div>
-        </div>
-      </a>
-      <a class="ccard" id="c-scholar" href="#" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 9l10 6 10-6-10-6z"/></svg>
-        <div>
-          <div style="font-weight:700;">Google Scholar</div>
-          <div style="font-size:13px; color:var(--text-muted);">View Profile</div>
-        </div>
-      </a>
-      <a class="ccard" id="c-orcid" href="#" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
-        <div>
-          <div style="font-weight:700;">ORCID</div>
-          <div id="c-orcid-val" style="font-size:13px; color:var(--text-muted);">0009-0003-5490-6537</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
 
 <footer>
-  <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-    <span><strong>Bikash Mishra</strong> &middot; Academic Portfolio</span>
-    <span id="bmYear"></span>
+
+  <div class="container footer-row">
+
+    <span>
+      <strong>Bikash Mishra</strong>
+      · Materials Chemistry
+    </span>
+
+    <span>
+      © <span id="year"></span>
+      · Academic Portfolio
+    </span>
+
   </div>
+
 </footer>
 
 <script>
-  /* UNABRIDGED COMPLETE DATASET WITH ALL PUBLICATIONS */
-  var SITE_DATA = {
-    email: "bikash.mishra@bose.res.in",
-    orcidId: "0009-0003-5490-6537",
-    googleScholarId: "nTXvBBIAAAAJ",
-    googleScholarUrl: "https://scholar.google.com/citations?user=nTXvBBIAAAAJ&hl=en",
-    baselineCitations: 870,
-    baselineHIndex: 10,
-    
-    announcements: [
-      { text: "🎓 Final-year PhD candidate — actively seeking postdoctoral positions.", link: "#contact", linkText: "Get in touch →" },
-      { text: "📄 New paper accepted in Sci. Adv. (2026) on Redox Active COFs for Electrocatalysis.", link: "#publications", linkText: "See publications →" },
-      { text: "🔬 New work in Adv. Mater. (2026) on Diketopyrrolopyrrole COFs for Li-Ion batteries.", link: "#research", linkText: "Read more →" }
-    ],
-    education: [
-      { 
-        year: "2022–Present", 
-        title: "PhD, Chemical Sciences", 
-        details: "S. N. Bose National Centre for Basic Sciences, Kolkata", 
-        supervisor: "Dr. Pradip Pachfule", 
-        supervisorUrl: "https://www.ecomcof.com/" 
-      },
-      { 
-        year: "2019–2021", 
-        title: "M.Sc., Organic Chemistry", 
-        details: "Banaras Hindu University (BHU), Varanasi", 
-        supervisor: "Prof. Ganesh Pandey", 
-        supervisorUrl: "https://bhu.ac.in/Site/FacultyProfile/1_150?FA001039" 
-      },
-      { 
-        year: "2016–2019", 
-        title: "B.Sc., Chemistry (Honours)", 
-        details: "Sidho-Kanho-Birsha University, Purulia" 
-      }
-    ],
-    publications: [
-      { 
-        title: "Visible-Light-Mediated Nitrogen Insertion for the Skeletal Editing by Covalent Organic Framework", 
-        authors: "Bikash Mishra†; Mondal, B.†; Roy, M.†; Dutta, S.; Mondal, S.; Banerjee, A.; Pachfule, P.*; Adhikari, D.*", 
-        journal: "Manuscript under preparation", 
-        badge: "PREP", 
-        doi: "#" 
-      },
-      { 
-        title: "Modulating the Local Reaction Microenvironment on Covalent Organic Frameworks for Photocatalytic CO₂ Reduction to Tunable Syngas Generation", 
-        authors: "Dutta, S.†; Bikash Mishra.; Ghosh, S.; Thapa, R.; Pachfule, P.*", 
-        journal: "Manuscript under preparation", 
-        badge: "PREP", 
-        doi: "#" 
-      },
-      { 
-        title: "Ultra-stable Vinylene-Linked Covalent Organic Framework for the Olefination of Fluorene under Green Light", 
-        authors: "Patil, H.; Nurani, C. I.; Roy, M.; Mishra, B.; Dutta, S.; Das, T.; Karmakar, A.; Bera, S.; Adhikari, D.*; Pachfule, P.*", 
-        journal: "Nanoscale 2026", 
-        badge: "NNSC", 
-        doi: "https://doi.org/10.1039/D6NR02474B" 
-      },
-      { 
-        title: "Metal-free Redox Active Covalent Organic Frameworks for Electrocatalytic Oxygen Reduction Reaction", 
-        authors: "Bikash Mishra†; Samui, S.†; Ghosh, S.; Dutta, S.; Nurani, C. I.; Roy, M.; Adhikari, D.; Thapa, R.*; Dey, R. S.*; Pachfule, P.*", 
-        journal: "Sci. Adv. 2026, Just Accepted (in production)", 
-        badge: "SCAD", 
-        doi: "#" 
-      },
-      { 
-        title: "Side-Chain Modulation in Diketopyrrolopyrrole-Based Covalent Organic Frameworks for Fast and Durable Lithium-Ion Batteries", 
-        authors: "Bikash Mishra†; Ghoshal, A.†; Dutta, S.; Ghosh, S.; Maitra, U.*; Pachfule, P.*", 
-        journal: "Adv. Mater. 2026, e73960", 
-        badge: "ADMA", 
-        doi: "https://doi.org/10.1002/adma.73960" 
-      },
-      { 
-        title: "Azo-Functionalized Chitosan Porous Films: A Sustainable Approach for Enhanced CO₂ Capture and Selectivity", 
-        authors: "Bonardd, S.; García Martín, C. del M.; Hernández García, J. I.; Bikash Mishra; Ramírez, Ó.; Díaz Díaz, D.", 
-        journal: "Carbohydr. Polym. Technol. Appl. 2026, 13, 101092", 
-        badge: "CPTA", 
-        doi: "https://doi.org/10.1016/j.carpta.2026.101092" 
-      },
-      { 
-        title: "Cationic Covalent Organic Framework for Photocatalytic Defluorinative Amination of Fluoroarenes", 
-        authors: "Dutta, S.; Roy, M.; Maji, S.; Bikash Mishra; Sen, A.; Tiwari, A.; Das, T. N.; Mondal, S.; Banerjee, A.; Adhikari, D.; Pachfule, P.", 
-        journal: "Angew. Chem. 2026, 138, e16235", 
-        badge: "ANGW", 
-        doi: "https://doi.org/10.1002/anie.202516235" 
-      },
-      { 
-        title: "An Anthraquinone-Based Covalent Organic Framework for Sustainable Photocatalytic Oxidative Degradation of Polystyrene", 
-        authors: "Tiwari, A.; Dutta, S.; Bikash Mishra; Chakrabortty, P.; Pachfule, P.*", 
-        journal: "Chem. Commun. 2026, 62, 1581-1585", 
-        badge: "CHCO", 
-        doi: "https://doi.org/10.1039/d5cc06210a" 
-      },
-      { 
-        title: "Tailoring the Cu²⁺ Coordination Microenvironment in Porous Organic Frameworks for Switchable CO₂ Photoreduction to CO or CH₄", 
-        authors: "Boro, B.; Zheng, T.; Boruah, A.; Kumar, R.; Bhattacharyya, D.; Shrotri, A.; Tong, Q.-X.; Bikash Mishra; Jian, J.-X.; Mondal, J.*", 
-        journal: "Small 2025, 21, e06582", 
-        badge: "SMLL", 
-        doi: "https://doi.org/10.1002/smll.202506582" 
-      },
-      { 
-        title: "Covalent Organic Frameworks for Photocatalysis", 
-        authors: "Bikash Mishra; Alam, A.; Chakraborty, A.; Kumbhakar, B.; Ghosh, S.*; Pachfule, P.*; Thomas, A.*", 
-        journal: "Adv. Mater. 2025, 37, 0935-9648", 
-        badge: "ADMA", 
-        doi: "https://doi.org/10.1002/adma.202413118" 
-      },
-      { 
-        title: "A Thiazole-Linked Dithiophenedione-Functionalized Covalent Organic Framework for Photocatalytic Oxidative Dehydrogenation Reactions", 
-        authors: "Bikash Mishra†; Maji, S.†; Roy, M.; Dutta, S.; Sinha, A.; Das, T. N.; Mondal, S.; Banerjee, A.; Thomas, A.; Pachfule, P.*; Adhikari, D.*", 
-        journal: "Chem. Mater. 2025, 37, 8775-8786", 
-        badge: "CHMA", 
-        doi: "https://doi.org/10.1021/acs.chemmater.5c01745" 
-      },
-      { 
-        title: "Diketopyrrolopyrrole-Based Donor-Acceptor Covalent Organic Frameworks for Iodine Capture", 
-        authors: "Bikash Mishra; Dutta, S.; Pal, U.; Rana, S.; Mishra, S. K.; Saha-Dasgupta, T.*; Pachfule, P.*", 
-        journal: "Small 2025, 21, 2411199", 
-        badge: "SMLL", 
-        doi: "https://doi.org/10.1002/smll.202411199" 
-      },
-      { 
-        title: "Enhancing Photocatalytic Activity via Formation of Heterojunctions Introduced through Postmetalation of Metal Organic Frameworks with Silver Ions", 
-        authors: "Gupta, H.; Saini, I.; Singh, V.; Singh, V.; Bikash Mishra", 
-        journal: "Phys. Scr. 2024, 99, 1059a3", 
-        badge: "PSCR", 
-        doi: "https://iopscience.iop.org/article/10.1088/1402-4896/ad7910" 
-      },
-      { 
-        title: "Covalent Organic Frameworks for Photocatalytic Hydrogen Peroxide Generation", 
-        authors: "Alam, A.; Kumbhakar, B.; Chakraborty, A.; Bikash Mishra; Ghosh, S.; Thomas, A.*; Pachfule, P.*", 
-        journal: "ACS Materials Lett. 2024, 6, 2007-2049", 
-        badge: "ACSM", 
-        doi: "https://doi.org/10.1021/acsmaterialslett.4c00418" 
-      },
-      { 
-        title: "Covalent Organic Framework Catalyzed Amide Synthesis Directly from Alcohol under Red Light Excitation", 
-        authors: "Roy, M.†; Bikash Mishra†; Maji, S.; Sinha, A.; Dutta, S.; Mondal, S.; Banerjee, A.; Pachfule, P.*; Adhikari, D.*", 
-        journal: "Angew. Chem. Int. Ed. 2024, 63, e202410300", 
-        badge: "ANGW", 
-        doi: "https://doi.org/10.1002/anie.202410300" 
-      },
-      { 
-        title: "Synthesis and Applications of Cage-Based Covalent Organic Frameworks", 
-        authors: "Dutta, S.; Hernández García, J. L.; Bikash Mishra; Diaz Diaz, D.; Pachfule, P.*", 
-        journal: "Cryst. Growth Des. 2024, 24, 6081-6094", 
-        badge: "ACGD", 
-        doi: "https://doi.org/10.1021/acs.cgd.4c00701" 
-      },
-      { 
-        title: "Dithiophenedione-Based Covalent Organic Frameworks for Supercapacitive Energy Storage", 
-        authors: "Li, S.; Kumbhakar, B.; Bikash Mishra; Roeser, J.; Chaoui, N.; Schmidt, J.; Thomas, A.; Pachfule, P.*", 
-        journal: "ACS Appl. Energy Mater. 2023, 6, 9256-9263", 
-        badge: "ACML", 
-        doi: "https://doi.org/10.1021/acsaem.3c01072" 
-      },
-      { 
-        title: "Impact of the Crystallinity of Covalent Organic Frameworks on Photocatalytic Hydrogen Evolution", 
-        authors: "Bikash Mishra; Alam, A.; Kumbhakar, B.; Díaz Díaz, D.; Pachfule, P.*", 
-        journal: "Cryst. Growth Des. 2023, 23, 4701-4719", 
-        badge: "ACGD", 
-        doi: "https://doi.org/10.1021/acs.cgd.3c00379" 
-      },
-      { 
-        title: "A Thiazole-Linked Covalent Organic Framework for Lithium Sulphur Batteries", 
-        authors: "Yan, R.†; Bikash Mishra†; Traxler, M.; Roeser, J.; Chaoui, N.; Kumbhakar, B.; Schmidt, J.; Li, S.*; Thomas, A.*; Pachfule, P.*", 
-        journal: "Angew. Chem. Int. Ed. 2023, 62, e202302276", 
-        badge: "ANGW", 
-        doi: "https://doi.org/10.1002/anie.202302276" 
-      },
-      { 
-        title: "Strategic Design of Covalent Organic Frameworks (COFs) for Photocatalytic Hydrogen Generation", 
-        authors: "Prakash, K.; Bikash Mishra; Nagaraja, C. M.*; Pachfule, P.*", 
-        journal: "J. Mater. Chem. A 2023, 11, 14489-14538", 
-        badge: "JMCA", 
-        doi: "https://doi.org/10.1039/d3ta02189k" 
-      }
-    ]
-  };
+/* ANNOUNCEMENTS DATASET */
+const SITE_DATA = {
+  announcements: [
+    { text: "🎓 Final-year PhD candidate — actively seeking postdoctoral positions.", link: "#contact", linkText: "Get in touch →" },
+    { text: "🔬 New work in Adv. Mater. (2026) on Diketopyrrolopyrrole COFs for Li-Ion batteries.", link: "#publications", linkText: "Read paper →" },
+    { text: "📄 Perspective published in Adv. Mater. (2025) on COFs for Photocatalysis.", link: "#publications", linkText: "See review →" }
+  ]
+};
 
-  document.getElementById('bmYear').textContent = new Date().getFullYear();
-
-  /* NEWS TICKER ROTATION LOGIC */
-  var tickerIdx = 0;
-  function updateTicker() {
-    var tText = document.getElementById('tickerText');
-    var tLink = document.getElementById('tickerLink');
-    if (!tText || !tLink) return;
-    tText.classList.add('fade');
-    setTimeout(function() {
-      var item = SITE_DATA.announcements[tickerIdx];
-      tText.textContent = item.text;
-      tLink.href = item.link;
-      tLink.textContent = item.linkText;
-      tText.classList.remove('fade');
-      tickerIdx = (tickerIdx + 1) % SITE_DATA.announcements.length;
-    }, 400);
+/* ACTUAL PUBLISHED PAPERS DATASET WITH HIGHLIGHTED AUTHOR CLASS */
+const publications = [
+  {
+    title: "Visible-Light-Mediated Nitrogen Insertion for the Skeletal Editing by Covalent Organic Framework",
+    authors: "<span class=\"author-highlight\">Bikash Mishra</span>†, Mondal, B.†, Roy, M.†, Dutta, S., Mondal, S., Banerjee, A., Pachfule, P.*, Adhikari, D.*",
+    journal: "Manuscript under preparation",
+    year: "2026",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "#",
+    cover: "cover1.jpg",
+    description: "Explores visible-light-mediated nitrogen insertion techniques for skeletal editing enabled by covalent organic frameworks."
+  },
+  {
+    title: "Modulating the Local Reaction Microenvironment on Covalent Organic Frameworks for Photocatalytic CO₂ Reduction to Tunable Syngas Generation",
+    authors: "Dutta, S.†, <span class=\"author-highlight\">Bikash Mishra</span>, Ghosh, S., Thapa, R., Pachfule, P.*",
+    journal: "Manuscript under preparation",
+    year: "2026",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "#",
+    cover: "cover2.jpg",
+    description: "Focuses on tuning the reaction microenvironment in COFs to optimize photocatalytic CO₂ reduction into customizable syngas ratios."
+  },
+  {
+    title: "Ultra-stable Vinylene-Linked Covalent Organic Framework for the Olefination of Fluorene under Green Light",
+    authors: "Patil, H., Nurani, C. I., Roy, M., <span class=\"author-highlight\">Mishra, B.</span>, Dutta, S., Das, T., Karmakar, A., Bera, S., Adhikari, D.*, Pachfule, P.*",
+    journal: "Nanoscale",
+    year: "2026",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1039/D6NR02474B",
+    cover: "cover3.jpg",
+    description: "Demonstrates an ultra-stable vinylene-linked COF structure designed for efficient green-light-driven fluorene olefination."
+  },
+  {
+    title: "Metal-free Redox Active Covalent Organic Frameworks for Electrocatalytic Oxygen Reduction Reaction",
+    authors: "<span class=\"author-highlight\">Bikash Mishra</span>†, Samui, S.†, Ghosh, S., Dutta, S., Nurani, C. I., Roy, M., Adhikari, D., Thapa, R.*, Dey, R. S.*, Pachfule, P.*",
+    journal: "Science Advances",
+    year: "2026",
+    category: "electrocatalysis",
+    badge: "Journal Article",
+    doi: "#",
+    cover: "cover4.jpg",
+    description: "Reports metal-free, redox-active COF materials engineered to boost electrocatalytic performance for oxygen reduction."
+  },
+  {
+    title: "Side-Chain Modulation in Diketopyrrolopyrrole-Based Covalent Organic Frameworks for Fast and Durable Lithium-Ion Batteries",
+    authors: "<span class=\"author-highlight\">Bikash Mishra</span>†, Ghoshal, A.†, Dutta, S., Ghosh, S., Maitra, U.*, Pachfule, P.*",
+    journal: "Advanced Materials",
+    year: "2026",
+    category: "energy storage",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1002/adma.73960",
+    cover: "cover5.jpg",
+    description: "Investigates strategic side-chain adjustments in DPP-based COFs to achieve rapid and long-lasting lithium-ion battery performance."
+  },
+  {
+    title: "Azo-Functionalized Chitosan Porous Films: A Sustainable Approach for Enhanced CO₂ Capture and Selectivity",
+    authors: "Bonardd, S., García Martín, C. del M., Hernández García, J. I., <span class=\"author-highlight\">Bikash Mishra</span>, Ramírez, Ó., Díaz Díaz, D.",
+    journal: "Carbohydrate Polymer Technologies and Applications",
+    year: "2026",
+    category: "gas capture",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1016/j.carpta.2026.101092",
+    cover: "cover6.jpg",
+    description: "Presents sustainable azo-functionalized chitosan porous films optimized for high-selectivity carbon dioxide capture."
+  },
+  {
+    title: "Cationic Covalent Organic Framework for Photocatalytic Defluorinative Amination of Fluoroarenes",
+    authors: "Dutta, S., Roy, M., Maji, S., <span class=\"author-highlight\">Bikash Mishra</span>, Sen, A., Tiwari, A., Das, T. N., Mondal, S., Banerjee, A., Adhikari, D., Pachfule, P.",
+    journal: "Angewandte Chemie International Edition",
+    year: "2026",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1002/anie.202516235",
+    cover: "cover7.jpg",
+    description: "Utilizes cationic COF architectures to drive efficient photocatalytic defluorinative amination of challenging fluoroarenes."
+  },
+  {
+    title: "An Anthraquinone-Based Covalent Organic Framework for Sustainable Photocatalytic Oxidative Degradation of Polystyrene",
+    authors: "Tiwari, A., Dutta, S., <span class=\"author-highlight\">Bikash Mishra</span>, Chakrabortty, P., Pachfule, P.*",
+    journal: "Chemical Communications",
+    year: "2026",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1039/d5cc06210a",
+    cover: "cover8.jpg",
+    description: "Employs anthraquinone-functionalized COFs for environmental remediation through the photocatalytic oxidative degradation of polystyrene waste."
+  },
+  {
+    title: "Tailoring the Cu²⁺ Coordination Microenvironment in Porous Organic Frameworks for Switchable CO₂ Photoreduction to CO or CH₄",
+    authors: "Boro, B., Zheng, T., Boruah, A., Kumar, R., Bhattacharyya, D., Shrotri, A., Tong, Q.-X., <span class=\"author-highlight\">Bikash Mishra</span>, Jian, J.-X., Mondal, J.*",
+    journal: "Small",
+    year: "2025",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1002/smll.202506582",
+    cover: "cover9.jpg",
+    description: "Tunes copper ion coordination environments in porous frameworks to direct selective photoreduction of CO₂ into either CO or CH₄."
+  },
+  {
+    title: "Covalent Organic Frameworks for Photocatalysis",
+    authors: "<span class=\"author-highlight\">Bikash Mishra</span>, Alam, A., Chakraborty, A., Kumbhakar, B., Ghosh, S.*, Pachfule, P.*, Thomas, A.*",
+    journal: "Advanced Materials",
+    year: "2025",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1002/adma.202413118",
+    cover: "cover10.jpg",
+    description: "Comprehensive review detailing structural design rules and advanced mechanistic insights for COF-based photocatalysis."
+  },
+  {
+    title: "A Thiazole-Linked Dithiophenedione-Functionalized Covalent Organic Framework for Photocatalytic Oxidative Dehydrogenation Reactions",
+    authors: "<span class=\"author-highlight\">Bikash Mishra</span>†, Maji, S.†, Roy, M., Dutta, S., Sinha, A., Das, T. N., Mondal, S., Banerjee, A., Thomas, A., Pachfule, P.*, Adhikari, D.*",
+    journal: "Chemistry of Materials",
+    year: "2025",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1021/acs.chemmater.5c01745",
+    cover: "cover11.jpg",
+    description: "Synthesizes thiazole-linked dithiophenedione COFs tailored for highly efficient photocatalytic oxidative dehydrogenation transformations."
+  },
+  {
+    title: "Diketopyrrolopyrrole-Based Donor-Acceptor Covalent Organic Frameworks for Iodine Capture",
+    authors: "<span class=\"author-highlight\">Bikash Mishra</span>, Dutta, S., Pal, U., Rana, S., Mishra, S. K., Saha-Dasgupta, T.*, Pachfule, P.*",
+    journal: "Small",
+    year: "2025",
+    category: "gas capture",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1002/smll.202411199",
+    cover: "cover12.jpg",
+    description: "Develops donor-acceptor DPP-based porous COFs for rapid and high-capacity iodine adsorption and capture."
+  },
+  {
+    title: "Enhancing Photocatalytic Activity via Formation of Heterojunctions Introduced through Postmetalation of Metal Organic Frameworks with Silver Ions",
+    authors: "Gupta, H., Saini, I., Singh, V., Singh, V., <span class=\"author-highlight\">Bikash Mishra</span>",
+    journal: "Physica Scripta",
+    year: "2024",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1088/1402-4896/ad7910",
+    cover: "cover13.jpg",
+    description: "Investigates silver-ion postmetalation strategies to build effective hetero-interfaces for carrier migration in photocatalysis."
+  },
+  {
+    title: "Covalent Organic Frameworks for Photocatalytic Hydrogen Peroxide Generation",
+    authors: "Alam, A., Kumbhakar, B., Chakraborty, A., <span class=\"author-highlight\">Bikash Mishra</span>, Ghosh, S., Thomas, A.*, Pachfule, P.*",
+    journal: "ACS Materials Letters",
+    year: "2024",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1021/acsmaterialslett.4c00418",
+    cover: "cover14.jpg",
+    description: "Reviews chemical design principles and structural engineering of COFs for solar-driven hydrogen peroxide synthesis."
+  },
+  {
+    title: "Covalent Organic Framework Catalyzed Amide Synthesis Directly from Alcohol under Red Light Excitation",
+    authors: "Roy, M.†, <span class=\"author-highlight\">Bikash Mishra</span>†, Maji, S., Sinha, A., Dutta, S., Mondal, S., Banerjee, A., Pachfule, P.*, Adhikari, D.*",
+    journal: "Angewandte Chemie International Edition",
+    year: "2024",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1002/anie.202410300",
+    cover: "cover15.jpg",
+    description: "Demonstrates direct amide synthesis from alcohols using COFs activated under low-energy red-light excitation."
+  },
+  {
+    title: "Synthesis and Applications of Cage-Based Covalent Organic Frameworks",
+    authors: "Dutta, S., Hernández García, J. L., <span class=\"author-highlight\">Bikash Mishra</span>, Diaz Diaz, D., Pachfule, P.*",
+    journal: "Crystal Growth & Design",
+    year: "2024",
+    category: "materials design",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1021/acs.cgd.4c00701",
+    cover: "cover16.jpg",
+    description: "Overview of synthetic methodologies and emerging applications of cage-based porous organic framework architectures."
+  },
+  {
+    title: "Dithiophenedione-Based Covalent Organic Frameworks for Supercapacitive Energy Storage",
+    authors: "Li, S., Kumbhakar, B., <span class=\"author-highlight\">Bikash Mishra</span>, Roeser, J., Chaoui, N., Schmidt, J., Thomas, A., Pachfule, P.*",
+    journal: "ACS Applied Energy Materials",
+    year: "2023",
+    category: "energy storage",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1021/acsaem.3c01072",
+    cover: "cover17.jpg",
+    description: "Evaluates dithiophenedione-functionalized COF electrodes for high-capacity and durable electrochemical supercapacitors."
+  },
+  {
+    title: "Impact of the Crystallinity of Covalent Organic Frameworks on Photocatalytic Hydrogen Evolution",
+    authors: "<span class=\"author-highlight\">Bikash Mishra</span>, Alam, A., Kumbhakar, B., Díaz Díaz, D., Pachfule, P.*",
+    journal: "Crystal Growth & Design",
+    year: "2023",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1021/acs.cgd.3c00379",
+    cover: "cover18.jpg",
+    description: "Analyzes the crucial role of COF crystallinity in facilitating charge separation and enhancing solar hydrogen production."
+  },
+  {
+    title: "A Thiazole-Linked Covalent Organic Framework for Lithium Sulphur Batteries",
+    authors: "Yan, R.†, <span class=\"author-highlight\">Bikash Mishra</span>†, Traxler, M., Roeser, J., Chaoui, N., Kumbhakar, B., Schmidt, J., Li, S.*, Thomas, A.*, Pachfule, P.*",
+    journal: "Angewandte Chemie International Edition",
+    year: "2023",
+    category: "energy storage",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1002/anie.202302276",
+    cover: "cover19.jpg",
+    description: "Introduces robust thiazole-linked COF hosts designed to mitigate polysulfide shuttling in lithium-sulfur energy systems."
+  },
+  {
+    title: "Strategic Design of Covalent Organic Frameworks (COFs) for Photocatalytic Hydrogen Generation",
+    authors: "Prakash, K., <span class=\"author-highlight\">Bikash Mishra</span>, Nagaraja, C. M.*, Pachfule, P.*",
+    journal: "Journal of Materials Chemistry A",
+    year: "2023",
+    category: "photocatalysis",
+    badge: "Journal Article",
+    doi: "https://doi.org/10.1039/d3ta02189k",
+    cover: "cover20.jpg",
+    description: "Highlights key reticular design strategies for developing semiconductor COF photocatalysts for water splitting."
   }
-  updateTicker();
-  setInterval(updateTicker, 5000);
+];
 
-  /* 3D TILT EFFECT ON HOLOGRAPHIC FRAME */
-  const card = document.querySelector('.tilt-card');
-  if (card) {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      card.style.transform = `perspective(1000px) rotateX(${-y / 15}deg) rotateY(${x / 15}deg)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-    });
-  }
+/* NEWS TICKER ROTATION LOGIC */
+var tickerIdx = 0;
+function updateTicker() {
+  var tText = document.getElementById('tickerText');
+  var tLink = document.getElementById('tickerLink');
+  if (!tText || !tLink) return;
+  tText.classList.add('fade');
+  setTimeout(function() {
+    var item = SITE_DATA.announcements[tickerIdx];
+    tText.textContent = item.text;
+    tLink.href = item.link;
+    tLink.textContent = item.linkText;
+    tText.classList.remove('fade');
+    tickerIdx = (tickerIdx + 1) % SITE_DATA.announcements.length;
+  }, 400);
+}
+updateTicker();
+setInterval(updateTicker, 5000);
 
-  /* RESEARCH CATEGORY FILTER LOGIC WITH BLUR EFFECT */
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const researchCards = document.querySelectorAll('.research-card');
+/* SPOTLIGHT CAROUSEL ANIMATION LOGIC */
+let currentSpotlightIndex = 0;
+const spotlightTotal = 3;
+const spotlightTrack = document.getElementById('spotlightTrack');
+const spotlightDots = document.querySelectorAll('.carousel-dot');
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // 1. Update active button style
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      const cat = btn.getAttribute('data-filter');
-
-      // 2. Apply blur filter to unselected cards
-      researchCards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        
-        if (cat === 'all' || cardCategory === cat) {
-          card.classList.remove('is-blurred');
-        } else {
-          card.classList.add('is-blurred');
-        }
-      });
-    });
+function updateSpotlight(index) {
+  currentSpotlightIndex = index;
+  spotlightTrack.style.transform = `translateX(-${currentSpotlightIndex * 100}%)`;
+  spotlightDots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === currentSpotlightIndex);
   });
+}
 
-  /* METRICS COUNT-UP ANIMATION LOGIC */
-  function startCountUp() {
-    const metrics = document.querySelectorAll('.metric-num');
-    metrics.forEach(metric => {
-      const target = parseInt(metric.getAttribute('data-target'));
-      let current = 0;
-      const increment = Math.ceil(target / 40);
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          metric.textContent = target + "+";
-          clearInterval(timer);
-        } else {
-          metric.textContent = current;
-        }
-      }, 30);
-    });
-  }
+document.getElementById('spotlightNext').addEventListener('click', () => {
+  const nextIdx = (currentSpotlightIndex + 1) % spotlightTotal;
+  updateSpotlight(nextIdx);
+});
 
-  let counted = false;
-  window.addEventListener('scroll', () => {
-    const metricsSection = document.querySelector('.metrics');
-    if (metricsSection) {
-      const rect = metricsSection.getBoundingClientRect();
-      if (rect.top < window.innerHeight && !counted) {
-        startCountUp();
-        counted = true;
-      }
-    }
+document.getElementById('spotlightPrev').addEventListener('click', () => {
+  const prevIdx = (currentSpotlightIndex - 1 + spotlightTotal) % spotlightTotal;
+  updateSpotlight(prevIdx);
+});
+
+spotlightDots.forEach(dot => {
+  dot.addEventListener('click', (e) => {
+    const idx = parseInt(e.target.getAttribute('data-index'));
+    updateSpotlight(idx);
   });
+});
 
-  /* THREE.JS BACKGROUND PARTICLE CANVAS (Updated for high-contrast visibility on white background) */
-  const bgScene = new THREE.Scene();
-  const bgCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const bgRenderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-bg'), alpha: true, antialias: true });
+/* Auto-advance spotlight carousel every 6 seconds */
+setInterval(() => {
+  const nextIdx = (currentSpotlightIndex + 1) % spotlightTotal;
+  updateSpotlight(nextIdx);
+}, 6000);
+
+/* THREE.JS BACKGROUND CANVAS */
+const bgScene = new THREE.Scene();
+const bgCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const bgRenderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-bg'), alpha: true, antialias: true });
+bgRenderer.setSize(window.innerWidth, window.innerHeight);
+
+const particleCount = 700;
+const geometry = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+for(let i=0; i<particleCount*3; i++) { positions[i] = (Math.random() - 0.5) * 15; }
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ size: 0.035, color: 0x00a6d6, transparent: true, opacity: 0.25 }));
+bgScene.add(particles);
+bgCamera.position.z = 5;
+
+let mouseX = 0, mouseY = 0;
+window.addEventListener('mousemove', (e) => {
+  mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
+  mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+});
+
+function animateBg() {
+  requestAnimationFrame(animateBg);
+  particles.rotation.y += 0.001;
+  bgCamera.position.x += (mouseX - bgCamera.position.x) * 0.05;
+  bgCamera.position.y += (-mouseY - bgCamera.position.y) * 0.05;
+  bgRenderer.render(bgScene, bgCamera);
+}
+animateBg();
+
+window.addEventListener('resize', () => {
+  bgCamera.aspect = window.innerWidth / window.innerHeight;
+  bgCamera.updateProjectionMatrix();
   bgRenderer.setSize(window.innerWidth, window.innerHeight);
+});
 
-  const particleCount = 700;
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(particleCount * 3);
-  for(let i=0; i<particleCount*3; i++) { positions[i] = (Math.random() - 0.5) * 15; }
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+/* KINETIC CURSOR TRAIL ANIMATION */
+const cursorCanvas = document.getElementById('cursor-canvas');
+const cctx = cursorCanvas.getContext('2d');
+let trailParticles = [];
 
-  const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ size: 0.035, color: 0x0284c7, transparent: true, opacity: 0.35 }));
-  bgScene.add(particles);
-  bgCamera.position.z = 5;
+function resizeCursorCanvas() {
+  cursorCanvas.width = window.innerWidth;
+  cursorCanvas.height = window.innerHeight;
+}
+resizeCursorCanvas();
+window.addEventListener('resize', resizeCursorCanvas);
 
-  let mouseX = 0, mouseY = 0;
-  window.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
-  });
-
-  function animateBg() {
-    requestAnimationFrame(animateBg);
-    particles.rotation.y += 0.001;
-    bgCamera.position.x += (mouseX - bgCamera.position.x) * 0.05;
-    bgCamera.position.y += (-mouseY - bgCamera.position.y) * 0.05;
-    bgRenderer.render(bgScene, bgCamera);
-  }
-  animateBg();
-
-  window.addEventListener('resize', () => {
-    bgCamera.aspect = window.innerWidth / window.innerHeight;
-    bgCamera.updateProjectionMatrix();
-    bgRenderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  /* KINETIC CURSOR TRAIL ANIMATION */
-  const cursorCanvas = document.getElementById('cursor-canvas');
-  const cctx = cursorCanvas.getContext('2d');
-  let trailParticles = [];
-
-  function resizeCursorCanvas() {
-    cursorCanvas.width = window.innerWidth;
-    cursorCanvas.height = window.innerHeight;
-  }
-  resizeCursorCanvas();
-  window.addEventListener('resize', resizeCursorCanvas);
-
-  window.addEventListener('mousemove', (e) => {
-    for (let i = 0; i < 2; i++) {
-      trailParticles.push({
-        x: e.clientX,
-        y: e.clientY,
-        vx: (Math.random() - 0.5) * 1.5,
-        vy: (Math.random() - 0.5) * 1.5,
-        size: Math.random() * 3 + 1,
-        alpha: 1,
-        color: Math.random() > 0.3 ? '#0284c7' : '#7c3aed'
-      });
-    }
-  });
-
-  function animateCursorTrail() {
-    cctx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-    for (let i = 0; i < trailParticles.length; i++) {
-      let p = trailParticles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.alpha -= 0.025;
-      
-      cctx.beginPath();
-      cctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      cctx.fillStyle = p.color;
-      cctx.globalAlpha = Math.max(0, p.alpha);
-      cctx.shadowBlur = 8;
-      cctx.shadowColor = p.color;
-      cctx.fill();
-      cctx.shadowBlur = 0;
-    }
-    
-    trailParticles = trailParticles.filter(p => p.alpha > 0);
-    requestAnimationFrame(animateCursorTrail);
-  }
-  animateCursorTrail();
-
-  /* RENDER EDUCATION WITH SUPERVISOR HYPERLINKS */
-  document.getElementById('education-list').innerHTML = SITE_DATA.education.map(function(e) {
-    var sup = e.supervisor ? '<div class="tl-supervisor">Supervisor: <a href="' + e.supervisorUrl + '" target="_blank">' + e.supervisor + '</a></div>' : '';
-    return '<div class="tl-item"><div class="tl-when">' + e.year + '</div><div><h3 style="font-size:18px; color:var(--text-main);">' + e.title + '</h3><p style="color:var(--text-muted); font-size:14.5px;">' + e.details + '</p>' + sup + '</div></div>';
-  }).join('');
-
-  /* SEARCHABLE PUBLICATIONS RENDERER WITH DOIs */
-  function renderPubs(filterText) {
-    var container = document.getElementById('full-pub-list');
-    var filtered = SITE_DATA.publications.filter(function(p) {
-      var query = (filterText || '').toLowerCase();
-      return p.title.toLowerCase().includes(query) || p.journal.toLowerCase().includes(query) || p.authors.toLowerCase().includes(query);
+window.addEventListener('mousemove', (e) => {
+  for (let i = 0; i < 2; i++) {
+    trailParticles.push({
+      x: e.clientX,
+      y: e.clientY,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: (Math.random() - 0.5) * 1.5,
+      size: Math.random() * 3 + 1,
+      alpha: 1,
+      color: Math.random() > 0.3 ? '#00a6d6' : '#7c3aed'
     });
-    container.innerHTML = filtered.map(function(p) {
-      var meta = p.doi && p.doi !== '#' ? '<div class="pub-meta"><a href="' + p.doi + '" target="_blank">View Article (DOI) &rarr;</a></div>' : '';
-      return '<div class="pub-item"><div class="pub-tag">' + (p.badge || 'PUB') + '</div><div><div class="pub-title">' + p.title + '</div><div class="pub-authors">' + p.authors + ' · <em>' + p.journal + '</em></div>' + meta + '</div></div>';
-    }).join('');
   }
+});
 
-  document.getElementById('pubSearch').addEventListener('input', function(e) { renderPubs(e.target.value); });
+function animateCursorTrail() {
+  cctx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+  for (let i = 0; i < trailParticles.length; i++) {
+    let p = trailParticles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.alpha -= 0.025;
+    
+    cctx.beginPath();
+    cctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    cctx.fillStyle = p.color;
+    cctx.globalAlpha = Math.max(0, p.alpha);
+    cctx.shadowBlur = 8;
+    cctx.shadowColor = p.color;
+    cctx.fill();
+    cctx.shadowBlur = 0;
+  }
+  
+  trailParticles = trailParticles.filter(p => p.alpha > 0);
+  requestAnimationFrame(animateCursorTrail);
+}
+animateCursorTrail();
 
-  /* INITIALIZATION */
-  document.getElementById('btn-email').href = "mailto:" + SITE_DATA.email;
-  document.getElementById('c-email').href = "mailto:" + SITE_DATA.email;
-  document.getElementById('c-email-val').textContent = SITE_DATA.email;
-  document.getElementById('btn-scholar').href = SITE_DATA.googleScholarUrl;
-  document.getElementById('c-scholar').href = SITE_DATA.googleScholarUrl;
-  document.getElementById('btn-orcid').href = "https://orcid.org/" + SITE_DATA.orcidId;
-  document.getElementById('c-orcid').href = "https://orcid.org/" + SITE_DATA.orcidId;
-  document.getElementById('c-orcid-val').textContent = SITE_DATA.orcidId;
+/* SCROLL NAVBAR EFFECT */
+window.addEventListener('scroll', () => {
+  const navWrapper = document.getElementById('navbarWrapper');
+  if (window.scrollY > 20) {
+    navWrapper.classList.add('scrolled');
+  } else {
+    navWrapper.classList.remove('scrolled');
+  }
+});
 
-  renderPubs('');
+/* MOBILE MENU TOGGLE */
+document.getElementById('mobileToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
 
-  /* TYPEWRITER EFFECT EXCLUSIVELY FOR THE 3 SPECIFIED FOCUS AREAS */
-  var typedWords = ["Photocatalysis", "Energy Storage", "Electrocatalysis"];
-  var typedEl = document.getElementById('typedWord');
-  var wordIdx = 0, charIdx = 0, isDeleting = false;
-  function typeEffect() {
-    var word = typedWords[wordIdx];
-    if (isDeleting) {
-      charIdx--;
-      typedEl.textContent = word.substring(0, charIdx);
-      if (charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % typedWords.length; }
-    } else {
-      charIdx++;
-      typedEl.textContent = word.substring(0, charIdx);
-      if (charIdx === word.length) { isDeleting = true; setTimeout(typeEffect, 1500); return; }
+/* TYPEWRITER EFFECT */
+const typedWords = ["Photocatalysis", "Energy Storage", "Electrocatalysis"];
+const typedEl = document.getElementById('typedWord');
+let wordIdx = 0, charIdx = 0, isDeleting = false;
+
+function typeEffect() {
+  const word = typedWords[wordIdx];
+  if (isDeleting) {
+    charIdx--;
+    typedEl.textContent = word.substring(0, charIdx);
+    if (charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % typedWords.length; }
+  } else {
+    charIdx++;
+    typedEl.textContent = word.substring(0, charIdx);
+    if (charIdx === word.length) { isDeleting = true; setTimeout(typeEffect, 1500); return; }
+  }
+  setTimeout(typeEffect, isDeleting ? 50 : 80);
+}
+typeEffect();
+
+/* METRICS COUNT UP */
+function startCountUp() {
+  const metrics = document.querySelectorAll('.metric-number');
+  metrics.forEach(metric => {
+    const target = parseInt(metric.getAttribute('data-target'));
+    let current = 0;
+    const increment = Math.ceil(target / 40);
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        metric.textContent = target + "+";
+        clearInterval(timer);
+      } else {
+        metric.textContent = current;
+      }
+    }, 30);
+  });
+}
+
+let counted = false;
+window.addEventListener('scroll', () => {
+  const metricsSection = document.querySelector('.metrics');
+  if (metricsSection) {
+    const rect = metricsSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight && !counted) {
+      startCountUp();
+      counted = true;
     }
-    setTimeout(typeEffect, isDeleting ? 50 : 80);
   }
-  typeEffect();
+});
+
+/* REVEAL ANIMATIONS */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* PUBLICATIONS RENDER & FILTER */
+let currentCategory = 'all';
+let searchQuery = '';
+
+function renderPublications() {
+  const grid = document.getElementById('pubGrid');
+  const filtered = publications.filter(pub => {
+    const matchesCategory = currentCategory === 'all' || pub.category === currentCategory;
+    const matchesSearch = pub.title.toLowerCase().includes(searchQuery) ||
+                          pub.authors.toLowerCase().includes(searchQuery) ||
+                          pub.journal.toLowerCase().includes(searchQuery);
+    return matchesCategory && matchesSearch;
+  });
+
+  document.getElementById('pubCount').textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results">No publications found matching your criteria.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((pub, index) => `
+    <article class="pub-card" onclick="openModal(${publications.indexOf(pub)})">
+      <span class="pub-tag">${pub.badge}</span>
+      <h3 class="pub-title">${pub.title}</h3>
+      <p class="pub-authors">${pub.authors}</p>
+      <p class="pub-journal"><em>${pub.journal}</em>, ${pub.year}</p>
+      <div class="pub-actions">
+        <a href="${pub.doi || '#'}" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">Publisher Site ↗</a>
+        <button class="btn btn-light" onclick="event.stopPropagation(); openModal(${publications.indexOf(pub)})">PDF</button>
+      </div>
+    </article>
+  `).join('');
+}
+
+document.querySelectorAll('.pub-filter').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    document.querySelectorAll('.pub-filter').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentCategory = e.target.getAttribute('data-category');
+    renderPublications();
+  });
+});
+
+document.getElementById('pubSearch').addEventListener('input', (e) => {
+  searchQuery = e.target.value.toLowerCase();
+  renderPublications();
+});
+
+/* MODAL LOGIC */
+function openModal(index) {
+  const pub = publications[index];
+  document.getElementById('modalCover').src = pub.cover;
+  document.getElementById('modalCategory').textContent = pub.category.toUpperCase();
+  document.getElementById('modalTitle').textContent = pub.title;
+  document.getElementById('modalAuthors').innerHTML = pub.authors;
+  document.getElementById('modalJournal').textContent = pub.journal + ', ' + pub.year;
+  document.getElementById('modalDescription').textContent = pub.description;
+  document.getElementById('modalLink').href = pub.doi || '#';
+  document.getElementById('pubModal').classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('pubModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('pubModal')) closeModal();
+});
+
+function closeModal() {
+  document.getElementById('pubModal').classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+renderPublications();
 </script>
 
 </body>
