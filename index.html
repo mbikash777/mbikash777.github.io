@@ -468,9 +468,9 @@ section {
 
 .profile-orbit {
   position: absolute;
-  inset: -40px;
+  inset: -30px;
 
-  border: 1px dashed rgba(0,166,214,.25);
+  border: 1px dashed rgba(8, 17, 31, 0.15);
   border-radius: 50%;
 
   animation: orbitSpin 25s linear infinite;
@@ -481,12 +481,12 @@ section {
   content: "";
   position: absolute;
 
-  width: 11px;
-  height: 11px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
 
   background: var(--cyan);
-  box-shadow: 0 0 25px var(--cyan);
+  box-shadow: 0 0 15px var(--cyan);
 }
 
 .profile-orbit::before {
@@ -497,8 +497,8 @@ section {
 .profile-orbit::after {
   bottom: 12%;
   left: 4%;
-  background: var(--violet);
-  box-shadow: 0 0 25px var(--violet);
+  background: var(--ink);
+  box-shadow: 0 0 15px rgba(8,17,31,.3);
 }
 
 @keyframes orbitSpin {
@@ -507,35 +507,34 @@ section {
   }
 }
 
+/* HIGH-CONTRAST REFINED THIN STROKE HOLDER */
 .profile-frame {
   position: relative;
   z-index: 2;
 
-  padding: 5px;
+  padding: 1.5px; /* Thin, sharp border stroke */
 
-  border-radius: 32px;
+  border-radius: 30px;
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--cyan),
-      var(--violet),
-      #38bdf8,
-      var(--cyan)
-    );
-
-  background-size: 300% 300%;
-
-  animation: gradientFlow 8s ease infinite;
+  background: linear-gradient(
+    145deg,
+    var(--ink) 0%,
+    var(--cyan) 50%,
+    rgba(8, 17, 31, 0.4) 100%
+  );
 
   box-shadow:
-    0 40px 90px rgba(0,166,214,.12);
+    0 20px 45px rgba(8, 17, 31, 0.08),
+    0 0 0 1px rgba(8, 17, 31, 0.05);
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.profile-frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 30px 60px rgba(0, 166, 214, 0.15),
+    0 0 0 1px var(--cyan);
 }
 
 .profile-inner {
@@ -553,7 +552,7 @@ section {
 }
 
 .profile-frame:hover img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 /* ============================================================
@@ -2057,8 +2056,8 @@ footer {
               <p class="featured-authors"><span class="author-highlight">Bikash Mishra†</span>; Ghoshal, A.†; Dutta, S.; Ghosh, S.; Maitra, U.*; Pachfule, P.*</p>
               <p class="featured-journal"><em>Advanced Materials</em>, 2026</p>
               <div class="pub-actions">
-                <button class="btn btn-primary magnetic" onclick="openModal(0)">Publisher Site ↗</button>
-                <button class="btn btn-light magnetic" onclick="openModal(0)">PDF</button>
+                <button class="btn btn-primary magnetic" onclick="openModal(4)">Publisher Site ↗</button>
+                <button class="btn btn-light magnetic" onclick="openModal(4)">PDF</button>
               </div>
             </div>
           </article>
@@ -2074,8 +2073,8 @@ footer {
               <p class="featured-authors"><span class="author-highlight">Bikash Mishra†</span>; Maji, S.†; Roy, M.; Dutta, S.; Sinha, A.; Das, T. N.; Mondal, S.; Banerjee, A.; Thomas, A.; Pachfule, P.*; Adhikari, D.*</p>
               <p class="featured-journal"><em>Chemistry of Materials</em>, 2025</p>
               <div class="pub-actions">
-                <button class="btn btn-primary magnetic" onclick="openModal(3)">Publisher Site ↗</button>
-                <button class="btn btn-light magnetic" onclick="openModal(3)">PDF</button>
+                <button class="btn btn-primary magnetic" onclick="openModal(10)">Publisher Site ↗</button>
+                <button class="btn btn-light magnetic" onclick="openModal(10)">PDF</button>
               </div>
             </div>
           </article>
@@ -2091,8 +2090,8 @@ footer {
               <p class="featured-authors">Roy, M.†; <span class="author-highlight">Bikash Mishra†</span>; Maji, S.; Sinha, A.; Dutta, S.; Mondal, S.; Banerjee, A.; Pachfule, P.*; Adhikari, D.*</p>
               <p class="featured-journal"><em>Angewandte Chemie International Edition</em>, 2024</p>
               <div class="pub-actions">
-                <button class="btn btn-primary magnetic" onclick="openModal(7)">Publisher Site ↗</button>
-                <button class="btn btn-light magnetic" onclick="openModal(7)">PDF</button>
+                <button class="btn btn-primary magnetic" onclick="openModal(14)">Publisher Site ↗</button>
+                <button class="btn btn-light magnetic" onclick="openModal(14)">PDF</button>
               </div>
             </div>
           </article>
@@ -2115,13 +2114,13 @@ footer {
       <div class="pub-filters">
         <button class="pub-filter active" data-category="all">All</button>
         <button class="pub-filter" data-category="photocatalysis">Photocatalysis</button>
-        <button class="pub-filter" data-category="energy">Energy Storage</button>
+        <button class="pub-filter" data-category="energy storage">Energy Storage</button>
         <button class="pub-filter" data-category="electrocatalysis">Electrocatalysis</button>
       </div>
 
       <div class="pub-search-wrapper">
         <span class="pub-search-icon">🔍</span>
-        <input class="pub-search" id="pubSearch" type="search" placeholder="Search title, author, journal...">
+        <input class="pub-search" id="pubSearch" type="search" placeholder="Search title, author, journal, year...">
       </div>
     </div>
 
@@ -2742,10 +2741,14 @@ let searchQuery = '';
 function renderPublications() {
   const grid = document.getElementById('pubGrid');
   const filtered = publications.filter(pub => {
-    const matchesCategory = currentCategory === 'all' || pub.category === currentCategory;
+    const matchesCategory = currentCategory === 'all' || pub.category.toLowerCase() === currentCategory.toLowerCase();
+    
+    // Search across Title, Authors, Journal, Year, and Description
     const matchesSearch = pub.title.toLowerCase().includes(searchQuery) ||
                           pub.authors.toLowerCase().includes(searchQuery) ||
-                          pub.journal.toLowerCase().includes(searchQuery);
+                          pub.journal.toLowerCase().includes(searchQuery) ||
+                          pub.year.toLowerCase().includes(searchQuery) ||
+                          pub.description.toLowerCase().includes(searchQuery);
     return matchesCategory && matchesSearch;
   });
 
@@ -2780,7 +2783,7 @@ document.querySelectorAll('.pub-filter').forEach(btn => {
 });
 
 document.getElementById('pubSearch').addEventListener('input', (e) => {
-  searchQuery = e.target.value.toLowerCase();
+  searchQuery = e.target.value.toLowerCase().trim();
   renderPublications();
 });
 
